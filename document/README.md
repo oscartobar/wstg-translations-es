@@ -1,16 +1,16 @@
-# Table of Contents
+# Tabla de Contenidos
 
-## 0. [Foreword by Eoin Keary](0-Foreword/README.md)
+## 0. [Prólogo de Eoin Keary](0-Foreword/README.md)
 
-## 1. [Frontispiece](1-Frontispiece/)
+## 1. [Portada](1-Frontispiece/)
 
-## 2. [Introduction](2-Introduction/)
+## 2. [Introducción](2-Introduction/)
 
-### 2.1 [The OWASP Testing Project](2-Introduction/README.md#The-OWASP-Testing-Project)
+### 2.1 [El proyecto de pruebas OWASP](2-Introduction/README.md#The-OWASP-Testing-Project)
 
-### 2.2 [Principles of Testing](2-Introduction/README.md#Principles-of-Testing)
+### 2.2 [Principios de pruebas](2-Introduction/README.md#Principles-of-Testing)
 
-### 2.3 [Testing Techniques Explained](2-Introduction/README.md#Testing-Techniques-Explained)
+### 2.3 [Técnicas de prueba explicadas](2-Introduction/README.md#Testing-Techniques-Explained)
 
 ### 2.4 [Manual Inspections and Reviews](2-Introduction/README.md#Manual-Inspections-and-Reviews)
 
