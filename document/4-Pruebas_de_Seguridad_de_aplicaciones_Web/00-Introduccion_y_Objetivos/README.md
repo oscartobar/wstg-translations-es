@@ -1,78 +1,78 @@
-# 4.0 Introduction and Objectives
+# 4.0 Introducción y Objetivos
 
-This section describes the OWASP web application security testing methodology and explains how to test for evidence of vulnerabilities within the application due to deficiencies with identified security controls.
+Esta sección describe la metodología de pruebas de seguridad de aplicaciones web de OWASP y explica cómo detectar vulnerabilidades en la aplicación debido a deficiencias en los controles de seguridad identificados.
 
-## What is Web Application Security Testing?
+## ¿Qué son las pruebas de seguridad de aplicaciones web?
 
-A security test is a method of evaluating the security of a computer system or network by methodically validating and verifying the effectiveness of application security controls. A web application security test focuses only on evaluating the security of a web application. The process involves an active analysis of the application for any weaknesses, technical flaws, or vulnerabilities. Any security issues that are found will be presented to the system owner, together with an assessment of the impact, a proposal for mitigation or a technical solution.
+Una prueba de seguridad es un método para evaluar la seguridad de un sistema informático o red mediante la validación y verificación metódica de la eficacia de los controles de seguridad de la aplicación. Una prueba de seguridad de aplicaciones web se centra únicamente en la evaluación de la seguridad de una aplicación web. El proceso implica un análisis activo de la aplicación para detectar debilidades, fallos técnicos o vulnerabilidades. Cualquier problema de seguridad detectado se presentará al propietario del sistema, junto con una evaluación de su impacto, una propuesta de mitigación o una solución técnica.
 
-## What is a Vulnerability?
+## ¿Qué es una vulnerabilidad?
 
-A vulnerability is a flaw or weakness in a system's design, implementation, operation or management that could be exploited to compromise the system's security objectives.
+Una vulnerabilidad es un fallo o debilidad en el diseño, la implementación, la operación o la gestión de un sistema que podría explotarse para comprometer los objetivos de seguridad del sistema.
 
-## What is a Threat?
+## ¿Qué es una amenaza?
 
-A threat is anything (a malicious external attacker, an internal user, a system instability, etc) that may harm the assets owned by an application (resources of value, such as the data in a database or in the file system) by exploiting a vulnerability.
+Una amenaza es cualquier cosa (un atacante externo malicioso, un usuario interno, una inestabilidad del sistema, etc.) que pueda dañar los activos de una aplicación (recursos valiosos, como los datos de una base de datos o del sistema de archivos) al explotar una vulnerabilidad.
 
-## What is a Test?
+## ¿Qué es una prueba?
 
-A test is an action to demonstrate that an application meets the security requirements of its stakeholders.
+Una prueba es una acción para demostrar que una aplicación cumple con los requisitos de seguridad de las partes interesadas.
 
-## The Approach in Writing this Guide
+## El enfoque de esta guía
 
-The OWASP approach is open and collaborative:
+El enfoque de OWASP es abierto y colaborativo:
 
-- Open: every security expert can participate with their experience in the project. Everything is free.
-- Collaborative: brainstorming is performed before the articles are written so the team can share ideas and develop a collective vision of the project. That means rough consensus, a wider audience and increased participation.
+- Abierto: todos los expertos en seguridad pueden participar en el proyecto aportando su experiencia. Todo es gratuito.
+- Colaborativo: se realiza una lluvia de ideas antes de escribir los artículos para que el equipo pueda compartir ideas y desarrollar una visión colectiva del proyecto. Esto implica un consenso general, una audiencia más amplia y una mayor participación.
 
-This approach tends to result in a defined Testing Methodology that will be:
+Este enfoque suele dar como resultado una metodología de pruebas definida que será:
 
-- Consistent
+- Consistente
 - Reproducible
-- Rigorous
-- Under quality control
+- Rigurosa
+- Bajo control de calidad
 
-The problems to be addressed are fully documented and tested. It is important to use various methods to test all the known vulnerabilities and document all the security test activities.
+Los problemas que se deben abordar se documentan y prueban completamente. Es importante utilizar diversos métodos para evaluar todas las vulnerabilidades conocidas y documentar todas las actividades de prueba de seguridad.
 
-## What Is the OWASP Testing Methodology?
+## ¿Qué es la metodología de pruebas de OWASP?
 
-Security testing will never be an exact science where a complete list of all possible issues that should be tested can be defined. In fact, security testing is only one of the several suitable techniques for testing the security of web applications under certain circumstances. The goal of this project is to collect all the possible testing techniques, explain these techniques, and keep the guide updated. The OWASP Web Application Security Testing methodology is based on the black box approach. The tester has little to no information about the application to be tested.
+Las pruebas de seguridad nunca serán una ciencia exacta donde se pueda definir una lista completa de todos los posibles problemas que deben evaluarse. De hecho, las pruebas de seguridad son solo una de las diversas técnicas adecuadas para evaluar la seguridad de las aplicaciones web en determinadas circunstancias. El objetivo de este proyecto es recopilar todas las técnicas de prueba posibles, explicarlas y mantener la guía actualizada. La metodología de pruebas de seguridad de aplicaciones web de OWASP se basa en el enfoque de caja negra. El evaluador tiene poca o ninguna información sobre la aplicación que se va a probar.
 
-The testing model consists of:
+El modelo de prueba consta de:
 
-- Tester: Who performs the testing activities
-- Tools and methodology: The core of this Testing Guide project
-- Application: The black box to test
+- Evaluador: Quién realiza las actividades de prueba
+- Herramientas y metodología: El núcleo de este proyecto de la Guía de Pruebas
+- Aplicación: La caja negra para probar
 
-Testing can be categorized as passive or active:
+Las pruebas se pueden clasificar como pasivas o activas:
 
-### Passive Testing
+### Pruebas pasivas
 
-During passive testing, a tester tries to understand the application's logic and explores the application as an end user. Tools can be used for information gathering. For example, an HTTP(S) proxy can be used to observe all the HTTP(S) requests and responses. At the end of this phase, the tester should generally understand all the access points and functionality of the system (e.g., HTTP headers, parameters, cookies, APIs, technology usage/patterns, etc). The [Information Gathering](../01-Information_Gathering/README.md) section explains how to perform passive testing.
+Durante las pruebas pasivas, el evaluador intenta comprender la lógica de la aplicación y la explora como un usuario final. Se pueden utilizar herramientas para recopilar información. Por ejemplo, se puede usar un proxy HTTP(S) para observar todas las solicitudes y respuestas HTTP(S). Al final de esta fase, el evaluador debería comprender, en general, todos los puntos de acceso y la funcionalidad del sistema (p. ej., encabezados HTTP, parámetros, cookies, API, uso/patrones de tecnología, etc.). La sección [Recopilación de información](../01-Recopilacion_de_informacion/README.md) explica cómo realizar pruebas pasivas.
 
-For example, a tester may find a page at the following URL: `https://www.example.com/login/auth_form`
+Por ejemplo, un evaluador podría encontrar una página en la siguiente URL: "https://www.example.com/login/auth_form"
 
-This may indicate an authentication form where the application requests a username and password.
+Esto podría indicar un formulario de autenticación donde la aplicación solicita un nombre de usuario y una contraseña.
 
-The following parameters represent two access points to the application: `https://www.example.com/appx?a=1&b=1`
+Los siguientes parámetros representan dos puntos de acceso a la aplicación: "https://www.example.com/appx?a=1&b=1"
 
-In this case, the application has two access points (parameters `a` and `b`). All the input points found in this phase represent targets for testing. Keeping track of the directory or call tree of the application and all the access points can be useful during active testing.
+En este caso, la aplicación tiene dos puntos de acceso (parámetros "a" y "b"). Todos los puntos de entrada encontrados en esta fase representan objetivos para las pruebas. Realizar un seguimiento del directorio o árbol de llamadas de la aplicación y de todos los puntos de acceso puede ser útil durante las pruebas activas.
 
-### Active Testing
+### Pruebas Activas
 
-During active testing, a tester uses the methodologies described in the following sections.
+Durante las pruebas activas, el tester utiliza las metodologías descritas en las siguientes secciones.
 
-The set of active tests have been split into 12 categories:
+El conjunto de pruebas activas se divide en 12 categorías:
 
-- Information Gathering
-- Configuration and Deployment Management Testing
-- Identity Management Testing
-- Authentication Testing
-- Authorization Testing
-- Session Management Testing
-- Input Validation Testing
-- Testing for Error Handling
-- Testing for Weak Cryptography
-- Business Logic Testing
-- Client-side Testing
-- API Testing
+- Recopilación de Información
+- Pruebas de Gestión de Configuración e Implementación
+- Pruebas de Gestión de Identidad
+- Pruebas de Autenticación
+- Pruebas de Autorización
+- Pruebas de Gestión de Sesiones
+- Pruebas de Validación de Entrada
+- Pruebas de Gestión de Errores
+- Pruebas de Criptografía Deficiente
+- Pruebas de Lógica de Negocio
+- Pruebas del lado del Cliente
+- Pruebas de API
