@@ -16,6 +16,212 @@
 
 ### 2.5 [Threat Modeling](2-Introduction/README.md#Threat-Modeling)
 
+### 2.5 Modelado de amenazas
+### 2.6 Revisión del código fuente
+### 2.7 Pruebas de penetración
+### 2.8 La necesidad de un enfoque equilibrado
+### 2.9 Derivación de los requisitos de las pruebas de seguridad
+### 2.10 Pruebas de seguridad integradas en los flujos de trabajo de desarrollo y pruebas
+### 2.11 Análisis e informes de datos de pruebas de seguridad
+## 3. El marco de pruebas OWASP
+### 3.1 El marco de pruebas de seguridad web
+### 3.2 Fase 1 antes del inicio del desarrollo
+### 3.3 Fase 2 durante la definición y el diseño
+### 3.4 Fase 3 durante el desarrollo
+### 3.5 Fase 4 durante la implementación
+### 3.6 Fase 5 durante el mantenimiento y las operaciones
+### 3.7 Un flujo de trabajo típico de pruebas SDLC
+### 3.8 Metodologías de pruebas de penetración
+## 4. Pruebas de seguridad de aplicaciones web
+### 4.0 Introducción y objetivos
+### 4.1 Recopilación de información
+#### 4.1.1 Realizar un reconocimiento de descubrimiento de motores de búsqueda para detectar fugas de información
+#### 4.1.2 Servidor web de huellas digitales
+#### 4.1.3 Revisar los metarchivos del servidor web para Fuga de información
+#### 4.1.4 Enumerar aplicaciones en el servidor web
+#### 4.1.5 Revisar el contenido de la página web para detectar fugas de información
+#### 4.1.6 Identificar los puntos de entrada de la aplicación
+#### 4.1.7 Mapear las rutas de ejecución a través de la aplicación
+#### 4.1.8 Marco de aplicación web Fingerprint
+#### 4.1.9 Aplicación web Fingerprint
+#### 4.1.10 Mapear la arquitectura de la aplicación
+## 4.2 Pruebas de configuración y gestión de la implementación
+### 4.2.1 Probar la configuración de la infraestructura de red
+### 4.2.2 Probar la configuración de la plataforma de la aplicación
+### 4.2.3 Probar el manejo de extensiones de archivo para información confidencial
+### 4.2.4 Revisar copias de seguridad antiguas y archivos sin referencia para detectar información confidencial
+### 4.2.5 Enumerar las interfaces de administración de la infraestructura y la aplicación
+### 4.2.6 Probar los métodos HTTP
+### 4.2.7 Probar la seguridad de transporte estricta HTTP
+### 4.2.8 Probar la política entre dominios de RIA
+### 4.2.9 Probar los permisos de archivo
+### 4.2.10 Probar la toma de control de subdominios
+### 4.2.11 Probar la nube Almacenamiento
+### 4.2.12 Prueba de la política de seguridad de contenido
+### 4.2.13 Prueba de confusión de rutas
+## 4.3 Prueba de gestión de identidades
+### 4.3.1 Prueba de definiciones de roles
+### 4.3.2 Prueba del proceso de registro de usuarios
+### 4.3.3 Prueba del proceso de aprovisionamiento de cuentas
+### 4.3.4 Prueba de enumeración de cuentas y cuentas de usuario adivinables
+### 4.3.5 Prueba de políticas de nombre de usuario débiles o no aplicadas
+### 4.4 Prueba de autenticación
+### 4.4.1 Prueba de credenciales transportadas por un canal cifrado
+### 4.4.2 Prueba de credenciales predeterminadas
+### 4.4.3 Prueba de mecanismos de bloqueo débiles
+### 4.4.4 Prueba de elusión del esquema de autenticación
+### 4.4.5 Prueba de recordatorios de contraseña vulnerables
+### 4.4.6 Prueba de vulnerabilidades de la caché del navegador
+### 4.4.7 Prueba de métodos de autenticación débiles
+### 4.4.8 Prueba de seguridad débil (pregunta y respuesta)
+### 4.4.9 Pruebas de funcionalidades débiles de cambio o restablecimiento de contraseña
+### 4.4.10 Pruebas de autenticación más débil en un canal alternativo
+### 4.4.11 Pruebas de autenticación multifactor
+## 4.5 Pruebas de autorización
+### 4.5.1 Pruebas de inclusión de archivos en recorridos de directorio
+### 4.5.2 Pruebas de omisión del esquema de autorización
+### 4.5.3 Pruebas de escalada de privilegios
+### 4.5.4 Pruebas de referencias directas a objetos inseguras
+4.5.5 Pruebas de vulnerabilidades de OAuth
+4.5.5.1 Pruebas de vulnerabilidades del servidor de autorización OAuth
+4.5.5.2 Pruebas de vulnerabilidades del cliente OAuth
+4.6 Pruebas de gestión de sesiones
+4.6.1 Pruebas del esquema de gestión de sesiones
+4.6.2 Pruebas de atributos de cookies
+4.6.3 Pruebas de fijación de sesiones
+4.6.4 Pruebas de variables de sesión expuestas
+4.6.5 Pruebas de solicitudes entre sitios Falsificación
+4.6.6 Pruebas de cierre de sesión
+4.6.7 Pruebas de tiempo de espera de sesión
+4.6.8 Pruebas de confusión de sesiones
+4.6.9 Pruebas de secuestro de sesiones
+4.6.10 Pruebas de tokens web JSON
+4.6.11 Pruebas de sesiones concurrentes
+4.7 Pruebas de validación de entrada
+4.7.1 Pruebas de secuencias de comandos entre sitios reflejadas
+4.7.2 Pruebas de secuencias de comandos entre sitios almacenadas
+4.7.3 Pruebas de manipulación de verbos HTTP
+4.7.4 Pruebas de contaminación de parámetros HTTP
+4.7.5 Pruebas de inyección SQL
+4.7.5.1 Pruebas para Oracle
+4.7.5.2 Pruebas para MySQL
+4.7.5.3 Pruebas para SQL Server
+4.7.5.4 Pruebas para PostgreSQL
+4.7.5.5 Pruebas para MS Access
+4.7.5.6 Pruebas para NoSQL Inyección
+4.7.5.7 Pruebas de inyección ORM
+4.7.5.8 Pruebas del lado del cliente
+4.7.6 Pruebas de inyección LDAP
+4.7.7 Pruebas de inyección XML
+4.7.8 Pruebas de inyección SSI
+4.7.9 Pruebas de inyección XPath
+4.7.10 Pruebas de inyección IMAP SMTP
+4.7.11 Pruebas de inyección de código
+4.7.11.1 Pruebas de inclusión de archivos
+4.7.12 Pruebas de inyección de comandos
+4.7.13 Pruebas de inyección de cadenas de formato
+4.7.14 Pruebas de vulnerabilidades incubadas
+4.7.15 Pruebas de contrabando de división HTTP
+4.7.16 Pruebas de solicitudes entrantes HTTP
+4.7.17 Pruebas de inyección de encabezado de host
+4.7.18 Pruebas de inyección de plantillas del lado del servidor
+4.7.19 Pruebas de falsificación de solicitudes del lado del servidor
+4.7.20 Pruebas de asignación masiva
+4.8 Pruebas de gestión de errores
+4.8.1 Pruebas de gestión de errores inadecuada
+4.8.2 Pruebas de seguimiento de pila
+4.9 Pruebas de criptografía débil
+4.9.1 Pruebas de seguridad de la capa de transporte débil
+4.9.2 Pruebas de relleno de Oracle
+4.9.3 Pruebas de información confidencial enviada a través de canales no cifrados
+4.9.4 Pruebas de cifrado débil
+4.10 Pruebas de lógica de negocios
+4.10.0 Introducción a la lógica de negocios
+4.10.1 Prueba de validación de datos de lógica de negocios
+4.10.2 Prueba de capacidad para falsificar solicitudes
+4.10.3 Prueba de comprobaciones de integridad
+4.10.4 Prueba de procedimientos
+#### 4.10.4 [Prueba de temporización de procesos](4-Web_Application_Security_Testing/10-Business_Logic_Testing/04-Test_for_Process_Timing.md)
+
+#### 4.10.5 [Prueba de límites de uso de una función](4-Web_Application_Security_Testing/10-Business_Logic_Testing/05-Test_Number_of_Times_a_Function_Can_Be_Used_Limits.md)
+
+#### 4.10.6 [Prueba de elusión de trabajo](4-Web_Application_Security_Testing/10-Business_Logic_Testing/05-Test_Number_of_Times_a_Function_Can_Be_Used_Limits.md) Flujos](4-Pruebas de seguridad de aplicaciones web/10-Pruebas de lógica empresarial/06-Pruebas para la elusión de flujos de trabajo.md)
+
+#### 4.10.7 [Prueba de defensas contra el uso indebido de aplicaciones](4-Pruebas de seguridad de aplicaciones web/10-Pruebas de lógica empresarial/07-Pruebas de defensa contra el uso indebido de aplicaciones.md)
+
+#### 4.10.8 [Prueba de carga de tipos de archivos inesperados](4-Pruebas de seguridad de aplicaciones web/10-Pruebas de lógica empresarial/08-Prueba de carga de tipos de archivos inesperados.md)
+
+#### 4.10.9 [Prueba de carga de archivos maliciosos Archivos](4-Pruebas de seguridad de aplicaciones web/10-Pruebas de lógica empresarial/09-Prueba de carga de archivos maliciosos.md)
+
+#### 4.10.10 [Prueba de la funcionalidad de pago](4-Pruebas de seguridad de aplicaciones web/10-Pruebas de lógica empresarial/10-Prueba-de-la-funcionalidad-de-pago.md)
+
+### 4.11 [Pruebas del lado del cliente](4-Pruebas de seguridad de aplicaciones web/11-Pruebas del lado del cliente/README.md)
+
+#### 4.11.1 [Pruebas para sitios cruzados basados ​​en DOM](4-Pruebas de seguridad de aplicaciones web/11-Pruebas del lado del cliente/README.md)
+
+#### 4.11.1 [Pruebas para sitios cruzados basados ​​en DOM](4-Pruebas de seguridad de aplicaciones web/11-Pruebas del lado del cliente/README.md) Scripting](4-Pruebas de seguridad de aplicaciones web/11-Pruebas del lado del cliente/01-Pruebas para scripts cruzados basados ​​en DOM.md)
+
+##### 4.11.1.1 [Pruebas para scripts cruzados basados ​​en DOM propios](4-Pruebas de seguridad de aplicaciones web/11-Pruebas del lado del cliente/01.1-Pruebas para scripts cruzados basados ​​en DOM propios.md)
+
+#### 4.11.2 [Pruebas de ejecución de JavaScript](4-Pruebas de seguridad de aplicaciones web/11-Pruebas del lado del cliente/02-Pruebas para ejecución de JavaScript.md)
+
+#### 4.11.3 [Pruebas de HTML Inyección](4-Pruebas de seguridad de aplicaciones web/11-Pruebas del lado del cliente/03-Pruebas para inyección de HTML.md)
+
+#### 4.11.4 [Pruebas de redirección de URL del lado del cliente](4-Pruebas de seguridad de aplicaciones web/11-Pruebas del lado del cliente/04-Pruebas para redirección de URL del lado del cliente.md)
+
+#### 4.11.5 [Pruebas de inyección de CSS](4-Pruebas de seguridad de aplicaciones web/11-Pruebas del lado del cliente/05-Pruebas para inyección de CSS.md)
+
+#### 4.11.6 [Pruebas de recursos del lado del cliente](4-Pruebas de seguridad de aplicaciones web/11-Pruebas del lado del cliente/05-Pruebas para inyección de CSS.md)
+
+#### 4.11.6 [Pruebas de recursos del lado del cliente](4-Pruebas de seguridad de aplicaciones web/11-Pruebas del lado del cliente/04-Pruebas para redirección de URL del lado del cliente.md) Manipulación](4-Pruebas de seguridad de aplicaciones web/11-Pruebas del lado del cliente/06-Pruebas para la manipulación de recursos del lado del cliente.md)
+
+#### 4.11.7 [Pruebas de intercambio de recursos entre orígenes](4-Pruebas de seguridad de aplicaciones web/11-Pruebas del lado del cliente/07-Pruebas de intercambio de recursos entre orígenes.md)
+
+#### 4.11.8 [Pruebas de flasheo entre sitios](4-Pruebas de seguridad de aplicaciones web/11-Pruebas del lado del cliente/08-Pruebas de flasheo entre sitios.md)
+
+#### 4.11.9 [Pruebas de Clickjacking](4-Pruebas de seguridad de aplicaciones web/11-Pruebas del lado del cliente/09-Pruebas para clickjacking.md)
+
+#### 4.11.10 [Pruebas de WebSockets](4-Pruebas de seguridad de aplicaciones web/11-Pruebas del lado del cliente/10-Pruebas de WebSockets.md)
+
+#### 4.11.11 [Pruebas de mensajería web](4-Pruebas de seguridad de aplicaciones web/11-Pruebas del lado del cliente/11-Pruebas de mensajería web.md)
+
+#### 4.11.12 [Pruebas del navegador Almacenamiento](4-Pruebas de seguridad de aplicaciones web/11-Pruebas del lado del cliente/12-Pruebas de almacenamiento del navegador.md)
+
+#### 4.11.13 [Pruebas de inclusión de scripts entre sitios](4-Pruebas de seguridad de aplicaciones web/11-Pruebas del lado del cliente/13-Pruebas de inclusión de scripts entre sitios.md)
+
+#### 4.11.14 [Pruebas de tabulación inversa](4-Pruebas de seguridad de aplicaciones web/11-Pruebas del lado del cliente/14-Pruebas de tabulación inversa.md)
+
+### 4.12 [API Pruebas](4-Web_Application_Security_Testing/12-API_Testing/README.md)
+
+#### 4.12.0 [Descripción general de las pruebas de API](4-Web_Application_Security_Testing/12-API_Testing/00-API_Testing_Overview.md)
+
+#### 4.12.1 [Reconocimiento de API](4-Web_Application_Security_Testing/12-API_Testing/01-API_Reconnaissance.md)
+
+#### 4.12.2 [Autorización de nivel de objeto roto de API](4-Web_Application_Security_Testing/12-API_Testing/02-API_Broken_Object_Level_Authorization.md)
+
+#### 4.12.99 [Pruebas de GraphQL](4-Web_Application_Security_Testing/12-API_Testing/99-Testing_GraphQL.md)
+
+## 5. [Informes](5-Reporting/README.md)
+
+### 5.1 [Estructura de informes](5-Reporting/01-Reporting_Structure.md)
+
+### 5.2 [Esquemas de nombres](5-Reporting/02-Naming_Schemes.md)
+
+## Apéndice A. [Recursos de herramientas de prueba](6-Appendix/A-Testing_Tools_Resource.md)
+
+## Apéndice B. [Lecturas recomendadas](6-Appendix/B-Suggested_Reading.md)
+
+## Apéndice C. [Fuzzing](6-Appendix/C-Fuzzing.md)
+
+## Apéndice D. [Inyección codificada](6-Appendix/D-Encoded_Injection.md)
+
+## Apéndice E. [Historial](6-Appendix/E-History.md)
+
+## Apéndice F. [Aprovechamiento de las herramientas de desarrollo](6-Appendix/F-Leveraging_Dev_Tools.md)
+
+
+
+
 ### 2.6 [Source Code Review](2-Introduction/README.md#Source-Code-Review)
 
 ### 2.7 [Penetration Testing](2-Introduction/README.md#Penetration-Testing)
