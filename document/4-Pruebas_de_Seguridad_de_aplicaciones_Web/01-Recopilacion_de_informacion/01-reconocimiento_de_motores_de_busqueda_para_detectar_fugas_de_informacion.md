@@ -1,97 +1,98 @@
-# Conduct Search Engine Discovery Reconnaissance for Information Leakage
+# Realizar Reconocimiento de Descubrimiento de Motores de Búsqueda para Detectar Fugas de Información
 
-|ID          |
+|ID |
 |------------|
 |WSTG-INFO-01|
 
-## Summary
+## Resumen
 
-In order for search engines to work, computer programs (or `robots`) regularly fetch data (referred to as [crawling](https://en.wikipedia.org/wiki/Web_crawler)) from billions of pages on the web. These programs find web content and functionality by following links from other pages, or by looking at sitemaps. If a site uses a special file called `robots.txt` to list pages that it does not want search engines to fetch, then the pages listed there will be ignored. This is a basic overview - Google offers a more in-depth explanation of [how a search engine works](https://support.google.com/webmasters/answer/70897?hl=en).
+Para que los motores de búsqueda funcionen, los programas informáticos (o "robots") extraen datos regularmente  [lo que se conoce como rastreo](https://en.wikipedia.org/wiki/Web_crawler)) de miles de millones de páginas web. Estos programas encuentran contenido y funcionalidad web siguiendo enlaces de otras páginas o consultando mapas de sitios. Si un sitio web utiliza un archivo especial llamado "robots.txt" para listar las páginas que no desea que los motores de búsqueda extraigan, estas páginas se ignorarán. Esta es una descripción general básica; Google ofrece una explicación más detallada de [cómo funciona un motor de búsqueda](https://support.google.com/webmasters/answer/70897?hl=en)..
 
-Testers can use search engines to perform reconnaissance on sites and web applications. There are direct and indirect elements to search engine discovery and reconnaissance: direct methods relate to searching the indexes and the associated content from caches, while indirect methods relate to learning sensitive design and configuration information by searching forums, newsgroups, and tendering sites.
+Los evaluadores pueden usar motores de búsqueda para realizar reconocimiento en sitios web y aplicaciones web. Existen elementos directos e indirectos en el descubrimiento y reconocimiento de motores de búsqueda: los métodos directos se relacionan con la búsqueda en los índices y el contenido asociado de las cachés, mientras que los métodos indirectos se relacionan con el aprendizaje de información sensible de diseño y configuración mediante la búsqueda en foros, grupos de noticias y sitios de licitación.
 
-Once a search engine robot has completed crawling, it commences indexing the web content based on tags and associated attributes, such as `<TITLE>`, in order to return relevant search results. If the `robots.txt` file is not updated during the lifetime of the site, and in-line HTML meta tags that instruct robots not to index content have not been used, then it is possible for indexes to contain web content not intended to be included by the owners. Site owners may use the previously mentioned `robots.txt`, HTML meta tags, authentication, and tools provided by search engines to remove such content.
+Una vez que un robot de un motor de búsqueda completa el rastreo, comienza a indexar el contenido web basándose en etiquetas y atributos asociados, como `<TITLE>`, para devolver resultados de búsqueda relevantes. Si el archivo `robots.txt` no se actualiza durante la vida útil del sitio y no se han utilizado metaetiquetas HTML en línea que indican a los robots que no indexen el contenido, es posible que los índices contengan contenido web no previsto por los propietarios. Los propietarios del sitio pueden utilizar el archivo `robots.txt` mencionado anteriormente, las metaetiquetas HTML, la autenticación y las herramientas proporcionadas por los motores de búsqueda para eliminar dicho contenido.
 
-## Test Objectives
+## Objetivos de la prueba
 
-- Identify what sensitive design and configuration information of the application, system, or organization is exposed directly (on the organization's site) or indirectly (via third-party services).
+- Identificar qué información sensible de diseño y configuración de la aplicación, el sistema o la organización está expuesta directamente (en el sitio web de la organización) o indirectamente (a través de servicios de terceros).
 
-## How to Test
+## Cómo realizar pruebas
 
-Use a search engine to search for potentially sensitive information. This may include:
+Utilice un motor de búsqueda para buscar información potencialmente sensible. Esto puede incluir:
 
-- network diagrams and configurations;
-- archived posts and emails by administrators or other key staff;
-- logon procedures and username formats;
-- usernames, passwords, and private keys;
-- third-party, or cloud service configuration files;
-- revealing error message content; and
-- non-public applications (development, test, User Acceptance Testing (UAT), and staging versions of sites).
+- Diagramas y configuraciones de red;
+- Publicaciones y correos electrónicos archivados de administradores u otro personal clave;
+- Procedimientos de inicio de sesión y formatos de nombre de usuario;
+- Nombres de usuario, contraseñas y claves privadas;
+- Archivos de configuración de terceros o de servicios en la nube;
+- Revelar el contenido de los mensajes de error; y
+- Aplicaciones no públicas (desarrollo, pruebas, pruebas de aceptación del usuario (UAT) y versiones de prueba de los sitios).
 
-### Search Engines
+### Motores de búsqueda
 
-Do not limit testing to just one search engine provider, as different search engines may generate different results. Search engine results can vary in a few ways, depending on when the engine last crawled content, and the algorithm the engine uses to determine relevant pages. Consider using the following (alphabetically listed) search engines:
+No limite las pruebas a un solo proveedor de motor de búsqueda, ya que diferentes motores de búsqueda pueden generar resultados distintos. Los resultados de los motores de búsqueda pueden variar según la última vez que el motor rastreó el contenido y el algoritmo que utiliza para determinar las páginas relevantes. Considere utilizar los siguientes motores de búsqueda (ordenados alfabéticamente):
 
-- [Baidu](https://www.baidu.com/), China's [most popular](https://en.wikipedia.org/wiki/Web_search_engine#Market_share) search engine.
-- [Bing](https://www.bing.com/), a search engine owned and operated by Microsoft, and the second [most popular](https://en.wikipedia.org/wiki/Web_search_engine#Market_share) worldwide. Supports [advanced search keywords](https://help.bing.microsoft.com/#apex/18/en-US/10001/-1).
-- [binsearch.info](https://binsearch.info/), a search engine for binary Usenet newsgroups.
-- [Common Crawl](https://commoncrawl.org/), "an open repository of web crawl data that can be accessed and analyzed by anyone."
-- [DuckDuckGo](https://duckduckgo.com/), a privacy-focused search engine that compiles results from many different [sources](https://help.duckduckgo.com/results/sources/). Supports [search syntax](https://help.duckduckgo.com/duckduckgo-help-pages/results/syntax/).
-- [Google](https://www.google.com/), which offers the world's [most popular](https://en.wikipedia.org/wiki/Web_search_engine#Market_share) search engine, and uses a ranking system to attempt to return the most relevant results. Supports [search operators](https://support.google.com/websearch/answer/2466433).
-- [Internet Archive Wayback Machine](https://archive.org/web/), "building a digital library of internet sites and other cultural artifacts in digital form."
-- [Shodan](https://www.shodan.io/), a service for searching internet-connected devices and services. Usage options include a limited free plan as well as paid subscription plans.
+- [Baidu](https://www.baidu.com/), El buscador  [mas popular](https://en.wikipedia.org/wiki/Web_search_engine#Market_share) en china
+- [Bing](https://www.bing.com/), el motor de búsqueda operado por Microsoft, y el segundo [más popular](https://en.wikipedia.org/wiki/Web_search_engine#Market_share) a nivel mundial. Admite [palabras clave de búsqueda avanzada](https://help.bing.microsoft.com/#apex/18/en-US/10001/-1).
+- [binsearch.info](https://binsearch.info/), un motor de búsqueda para grupos de noticias binarios de Usenet.
+- [Common Crawl](https://commoncrawl.org/), "un repositorio abierto de datos de rastreo web al que cualquier persona puede acceder y analizar".
+- [DuckDuckGo](https://duckduckgo.com/), un motor de búsqueda centrado en la privacidad que recopila resultados de muchas diferentes [fuentes](https://help.duckduckgo.com/results/sources/). Admite [sintaxis de búsqueda](https://help.duckduckgo.com/duckduckgo-help-pages/results/syntax/).
+- [Google](https://www.google.com/), Ofrece el motor de búsqueda [más popular](https://en.wikipedia.org/wiki/Web_search_engine#Market_share) del mundo, y utiliza un sistema de clasificación para intentar mostrar los resultados más relevantes.  Admite [operadores de búsqueda](https://support.google.com/websearch/answer/2466433).
+- [Internet Archive Wayback Machine](https://archive.org/web/), "contruyen una biblioteca digital de sitios de Internet y otros artefactos culturales en formato digital".
+- [Shodan](https://www.shodan.io/), Un servicio para buscar dispositivos y servicios conectados a internet. Las opciones de uso incluyen un plan gratuito limitado y planes de suscripción de pago.
 
-### Search Operators
+### Operadores de búsqueda
 
-A search operator is a special keyword or syntax that extends the capabilities of regular search queries, and can help obtain more specific results. They generally take the form of `operator:query`. Here are some commonly supported search operators:
+Un operador de búsqueda es una palabra clave o sintaxis especial que amplía las capacidades de las consultas de búsqueda habituales y puede ayudar a obtener resultados más específicos. Generalmente se presenta en forma de `operator:query`. A continuación, se muestran algunos operadores de búsqueda comúnmente admitidos:
 
-- `site:` will limit the search to the provided domain.
-- `inurl:` will only return results that include the keyword in the URL.
-- `intitle:` will only return results that have the keyword in the page title.
-- `intext:` or `inbody:` will only search for the keyword in the body of pages.
-- `filetype:` will match only a specific file type, i.e. `.png`, or `.php`.
+- `site:` limita la búsqueda al dominio proporcionado.
+- `inurl:` solo muestra resultados que incluyen la palabra clave en la URL.
+- `intitle:` solo muestra resultados que tienen la palabra clave en el título de la página.
+- `intext:` o `inbody:` solo buscan la palabra clave en el cuerpo de las páginas.
+- `filetype:` solo coincide con un tipo de archivo específico, por ejemplo, `.png` o `.php`.
 
-For example, to find the web content of owasp.org as indexed by a typical search engine, the syntax required is:
+Por ejemplo, para encontrar el contenido web de owasp.org indexado por un motor de búsqueda típico, la sintaxis requerida es:
+
 
 ```text
 site:owasp.org
 ```
 
 ![Google Site Operation Search Result Example](images/Google_site_Operator_Search_Results_Example_20200406.png)\
-*Figure 4.1.1-1: Google Site Operation Search Result Example*
+*Figura 4.1.1-1: Ejemplo de resultado de búsqueda de Google Site Operation*
 
-### Viewing Cached Content
+### Visualización de contenido en caché
 
-To search for content that has previously been indexed, use the `cache:` operator. This is helpful for viewing content that may have changed since the time it was indexed, or that may no longer be available. Not all search engines provide cached content to search; the most useful source at time of writing is Google.
+Para buscar contenido indexado previamente, utilice el operador `cache:`. Esto resulta útil para visualizar contenido que haya cambiado desde su indexación o que ya no esté disponible. No todos los motores de búsqueda ofrecen contenido en caché; la fuente más útil al momento de escribir este artículo es Google.
 
-To view `owasp.org` as it is cached, the syntax is:
+Para ver `owasp.org` tal como está en caché, la sintaxis es:
 
 ```text
 cache:owasp.org
 ```
 
 ![Google Cache Operation Search Result Example](images/Google_cache_Operator_Search_Results_Example_20200406.png)\
-*Figure 4.1.1-2: Google Cache Operation Search Result Example*
+*Figura 4.1.1-2: Ejemplo de resultado de búsqueda de la operación de caché de Google*
 
-### Google Hacking or Dorking
+### Hackeo de Google o Dorking
 
-Searching with operators can be a very effective discovery technique when combined with the creativity of the tester. Operators can be chained to effectively discover specific kinds of sensitive files and information. This technique, called [Google hacking](https://en.wikipedia.org/wiki/Google_hacking) or Dorking, is also possible using other search engines, as long as the search operators are supported.
+La búsqueda con operadores puede ser una técnica de descubrimiento muy eficaz cuando se combina con la creatividad del tester. Los operadores se pueden encadenar para descubrir eficazmente tipos específicos de archivos e información confidencial. Esta técnica, llamada [Google hacking](https://en.wikipedia.org/wiki/Google_hacking) o Dorking, también es posible usando otros motores de búsqueda, siempre que los operadores de búsqueda sean compatibles.
 
-A database of dorks, like the [Google Hacking Database](https://www.exploit-db.com/google-hacking-database), is a useful resource that can help uncover specific information. Some categories of dorks available on this database include:
+Una base de datos de dorks, como la [Google Hacking Database](https://www.exploit-db.com/google-hacking-database), Es un recurso útil que puede ayudar a descubrir información específica. Algunas categorías de dorks disponibles en esta base de datos incluyen:
 
-- Footholds
-- Files containing usernames
-- Sensitive Directories
-- Web Server Detection
-- Vulnerable Files
-- Vulnerable Servers
-- Error Messages
-- Files containing juicy info
-- Files containing passwords
-- Sensitive Online Shopping Info
+- Puntos de apoyo
+- Archivos con nombres de usuario
+- Directorios sensibles
+- Detección de servidores web
+- Archivos vulnerables
+- Servidores vulnerables
+- Mensajes de error
+- Archivos con información relevante
+- Archivos con contraseñas
+- Información sensible sobre compras en línea
 
-## Remediation
+## Remediación
 
-Carefully consider the sensitivity of design and configuration information before it is posted online.
+Considere cuidadosamente la confidencialidad de la información de diseño y configuración antes de publicarla en línea.
 
-Periodically review the sensitivity of existing design and configuration information that is posted online.
+Revise periódicamente la confidencialidad de la información de diseño y configuración publicada en línea.
