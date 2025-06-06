@@ -1,4 +1,4 @@
-# OWASP Web Security Testing Guide
+# Traducción de la Guía de Pruebas de Seguridad Web - OWASP
 
 [![Contributions Welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](https://github.com/OWASP/wstg/issues)
 [![OWASP Flagship](https://img.shields.io/badge/owasp-flagship-brightgreen.svg)](https://owasp.org/projects/)
@@ -6,31 +6,33 @@
 
 [![Creative Commons License](https://licensebuttons.net/l/by-sa/4.0/88x31.png)](https://creativecommons.org/licenses/by-sa/4.0/ "CC BY-SA 4.0")
 
-Welcome to the official repository for the Open Web Application Security Project® (OWASP®) Web Security Testing Guide (WSTG). The WSTG is a comprehensive guide to testing the security of web applications and web services. Created by the collaborative efforts of security professionals and dedicated volunteers, the WSTG provides a framework of best practices used by penetration testers and organizations all over the world.
+El repositorio oficial en ingles lo encuentra en https://github.com/OWASP/wstg. Esta es la traduccion al español del repositorio original.
 
-We are currently working on release version 5.0. You can [read the current document here on GitHub](https://github.com/OWASP/wstg/tree/master/document).
+Bienvenido al repositorio oficial de la Guía de Pruebas de Seguridad Web (WSTG) del Proyecto Abierto de Seguridad de Aplicaciones Web® (OWASP®). La WSTG es una guía completa para probar la seguridad de aplicaciones y servicios web. Creada gracias a la colaboración de profesionales de la seguridad y voluntarios dedicados, la WSTG proporciona un marco de buenas prácticas utilizado por expertos en pruebas de penetración y organizaciones de todo el mundo.
 
-For the last stable release, [check release 4.2](https://github.com/OWASP/wstg/releases/tag/v4.2). Also available [online](https://owasp.org/www-project-web-security-testing-guide/v42/).
+Actualmente estamos trabajando en la versión 5.0. Puede consultarla. [Lea el documento actual aquí en GitHub](https://github.com/OWASP/wstg/tree/master/document).
 
-- [How To Reference WSTG Scenarios](#how-to-reference-wstg-scenarios)
-    - [Linking](#linking)
+Para la última versión estable, [vea la versión 4.2](https://github.com/OWASP/wstg/releases/tag/v4.2). También disponible [online](https://owasp.org/www-project-web-security-testing-guide/v42/).
+
+- [Cómo referenciar escenarios WSTG](#how-to-reference-wstg-scenarios)
+    - [Enlaces](#linking)
 - [Contributions, Feature Requests, and Feedback](#contributions-feature-requests-and-feedback)
 - [Chat With Us](#chat-with-us)
 - [Project Leaders](#project-leaders)
 - [Core Team](#core-team)
 - [Translations](#translations)
 
-## How To Reference WSTG Scenarios
+## Cómo referenciar escenarios WSTG
 
-Each scenario has an identifier in the format `WSTG-<category>-<number>`, where: 'category' is a 4 character upper case string that identifies the type of test or weakness, and 'number' is a zero-padded numeric value from 01 to 99. For example:`WSTG-INFO-02` is the second Information Gathering test.
+Cada escenario tiene un identificador con el formato `WSTG-<categoría>-<número>`, donde `categoría` es una cadena de 4 caracteres en mayúsculas que identifica el tipo de prueba o punto débil, y `número` es un valor numérico con relleno de ceros del 01 al 99. Por ejemplo: `WSTG-INFO-02` es la segunda prueba de recopilación de información.
 
-The identifiers may change between versions. Therefore, it is preferable that other documents, reports, or tools use the format: `WSTG-<version>-<category>-<number>`, where: 'version' is the version tag with punctuation removed. For example: `WSTG-v42-INFO-02` would be understood to mean specifically the second Information Gathering test from version 4.2.
+Los identificadores pueden cambiar entre versiones. Por lo tanto, es preferible que otros documentos, informes o herramientas utilicen el formato `WSTG-<versión>-<categoría>-<número>`, donde `versión` es la etiqueta de la versión sin puntuación. Por ejemplo: `WSTG-v42-INFO-02` se entendería como la segunda prueba de recopilación de información de la versión 4.2.
 
-If identifiers are used without including the `<version>` element, they should be assumed to refer to the latest Web Security Testing Guide content. As the guide grows and changes this becomes problematic, which is why writers or developers should include the version element.
+Si se utilizan identificadores sin el elemento `<versión>`, se debe asumir que se refieren al contenido más reciente de la Guía de Pruebas de Seguridad Web. A medida que la guía crece y cambia, esto se vuelve problemático, por lo que los escritores o desarrolladores deben incluir el elemento de versión.
 
-### Linking
+### Enlaces
 
-Linking to Web Security Testing Guide scenarios should be done using versioned links not `stable` or `latest`, which will change with time. However, it is the project team's intention that versioned links do not change. For example: `https://owasp.org/www-project-web-security-testing-guide/v42/4-Web_Application_Security_Testing/01-Information_Gathering/02-Fingerprint_Web_Server.html`. Note: the `v42` element refers to version 4.2.
+Los enlaces a los escenarios de la Guía de Pruebas de Seguridad Web deben realizarse mediante enlaces versionados, no "estable" ni "último", que cambiarán con el tiempo. Sin embargo, la intención del equipo del proyecto es que los enlaces versionados no cambien. Por ejemplo: `https://owasp.org/www-project-web-security-testing-guide/v42/4-Web_Application_Security_Testing/01-Information_Gathering/02-Fingerprint_Web_Server.html`. Note: the `v42` element refers to version 4.2.
 
 ## Contributions, Feature Requests, and Feedback
 
