@@ -32,7 +32,7 @@ Si se utilizan identificadores sin el elemento `<versión>`, se debe asumir que 
 
 ### Enlaces
 
-Los enlaces a los escenarios de la Guía de Pruebas de Seguridad Web deben realizarse mediante enlaces versionados, no "estable" ni "último", que cambiarán con el tiempo. Sin embargo, la intención del equipo del proyecto es que los enlaces versionados no cambien. Por ejemplo: `https://owasp.org/www-project-web-security-testing-guide/v42/4-Web_Application_Security_Testing/01-Information_Gathering/02-Fingerprint_Web_Server.html`. Note: the `v42` element refers to version 4.2.
+Los enlaces a los escenarios de la Guía de Pruebas de Seguridad Web deben realizarse mediante enlaces versionados, no "estable" ni "último", que cambiarán con el tiempo. Sin embargo, la intención del equipo del proyecto es que los enlaces versionados no cambien. Por ejemplo: `https://owasp.org/www-project-web-security-testing-guide/v42/4-Pruebas_de_Seguridad_de_aplicaciones_Web/01-Information_Gathering/02-Fingerprint_Web_Server.html`. Note: the `v42` element refers to version 4.2.
 
 ## Contributions, Feature Requests, and Feedback
 

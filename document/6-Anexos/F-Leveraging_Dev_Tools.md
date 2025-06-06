@@ -40,7 +40,7 @@ Opening Dev Tools can be accomplished in a number of ways.
 
 ### Related Testing
 
-- [Testing for Browser Cache Weaknesses](../4-Web_Application_Security_Testing/04-Authentication_Testing/06-Testing_for_Browser_Cache_Weaknesses.md)
+- [Testing for Browser Cache Weaknesses](../4-Pruebas_de_Seguridad_de_aplicaciones_Web/04-Authentication_Testing/06-Testing_for_Browser_Cache_Weaknesses.md)
 
 ### Google Chrome
 
@@ -67,11 +67,11 @@ Later click on the garbage can `Delete` button to the right of the `general.user
 
 ### Related Testing
 
-- [Authentication Testing](../4-Web_Application_Security_Testing/04-Authentication_Testing/README.md)
-- [Authorization Testing](../4-Web_Application_Security_Testing/05-Authorization_Testing/README.md)
-- [Session Management Testing](../4-Web_Application_Security_Testing/06-Session_Management_Testing/README.md)
-- [Input Validation Testing](../4-Web_Application_Security_Testing/07-Input_Validation_Testing/README.md)
-- [Business Logic Testing](../4-Web_Application_Security_Testing/10-Business_Logic_Testing/README.md)
+- [Authentication Testing](../4-Pruebas_de_Seguridad_de_aplicaciones_Web/04-Authentication_Testing/README.md)
+- [Authorization Testing](../4-Pruebas_de_Seguridad_de_aplicaciones_Web/05-Authorization_Testing/README.md)
+- [Session Management Testing](../4-Pruebas_de_Seguridad_de_aplicaciones_Web/06-Session_Management_Testing/README.md)
+- [Input Validation Testing](../4-Pruebas_de_Seguridad_de_aplicaciones_Web/07-Input_Validation_Testing/README.md)
+- [Business Logic Testing](../4-Pruebas_de_Seguridad_de_aplicaciones_Web/10-Business_Logic_Testing/README.md)
 
 ### Mozilla Firefox
 
@@ -93,10 +93,10 @@ Later click on the garbage can `Delete` button to the right of the `general.user
 
 ### Related Testing
 
-- [Authentication Testing](../4-Web_Application_Security_Testing/04-Authentication_Testing/README.md)
-- [Authorization Testing](../4-Web_Application_Security_Testing/05-Authorization_Testing/README.md)
-- [Session Management Testing](../4-Web_Application_Security_Testing/06-Session_Management_Testing/README.md)
-- [Testing for Cookie Attributes](../4-Web_Application_Security_Testing/06-Session_Management_Testing/02-Testing_for_Cookies_Attributes.md)
+- [Authentication Testing](../4-Pruebas_de_Seguridad_de_aplicaciones_Web/04-Authentication_Testing/README.md)
+- [Authorization Testing](../4-Pruebas_de_Seguridad_de_aplicaciones_Web/05-Authorization_Testing/README.md)
+- [Session Management Testing](../4-Pruebas_de_Seguridad_de_aplicaciones_Web/06-Session_Management_Testing/README.md)
+- [Testing for Cookie Attributes](../4-Pruebas_de_Seguridad_de_aplicaciones_Web/06-Session_Management_Testing/02-Testing_for_Cookies_Attributes.md)
 
 ### Google Chrome
 
@@ -123,7 +123,7 @@ Later click on the garbage can `Delete` button to the right of the `general.user
 
 ### Related Testing
 
-- [Testing Browser Storage](../4-Web_Application_Security_Testing/11-Client-side_Testing/12-Testing_Browser_Storage.md)
+- [Testing Browser Storage](../4-Pruebas_de_Seguridad_de_aplicaciones_Web/11-Client-side_Testing/12-Testing_Browser_Storage.md)
 
 ### Google Chrome
 
@@ -152,7 +152,7 @@ Later click on the garbage can `Delete` button to the right of the `general.user
 
 ### Related Testing
 
-- [Testing for Client-side Resource Manipulation](../4-Web_Application_Security_Testing/11-Client-side_Testing/06-Testing_for_Client-side_Resource_Manipulation.md)
+- [Testing for Client-side Resource Manipulation](../4-Pruebas_de_Seguridad_de_aplicaciones_Web/11-Client-side_Testing/06-Testing_for_Client-side_Resource_Manipulation.md)
 
 ### General
 
@@ -179,7 +179,7 @@ All major browsers support manipulating CSS leveraging the Dev Tools Console and
 
 ### Related Testing
 
-- [Information Gathering](../4-Web_Application_Security_Testing/01-Information_Gathering/README.md)
+- [Information Gathering](../4-Pruebas_de_Seguridad_de_aplicaciones_Web/01-Information_Gathering/README.md)
 
 ### Google Chrome
 
@@ -236,7 +236,7 @@ All major browsers support manipulating CSS leveraging the Dev Tools Console and
 
 ### Related Testing
 
-- Many (perhaps even most) types of [Web Application Security Testing](../4-Web_Application_Security_Testing/README.md) can benefit from various types of encoding.
+- Many (perhaps even most) types of [Web Application Security Testing](../4-Pruebas_de_Seguridad_de_aplicaciones_Web/README.md) can benefit from various types of encoding.
 
 ### General
 
@@ -250,9 +250,9 @@ All major browsers support encoding and decoding strings in various ways leverag
 
 ### Related Testing
 
-- [Testing for Browser Cache Weaknesses](../4-Web_Application_Security_Testing/04-Authentication_Testing/06-Testing_for_Browser_Cache_Weaknesses.md)
-- [Testing for Weaker Authentication in Alternative Channel](../4-Web_Application_Security_Testing/04-Authentication_Testing/10-Testing_for_Weaker_Authentication_in_Alternative_Channel.md)
-- [Testing for Clickjacking](../4-Web_Application_Security_Testing/11-Client-side_Testing/09-Testing_for_Clickjacking.md)
+- [Testing for Browser Cache Weaknesses](../4-Pruebas_de_Seguridad_de_aplicaciones_Web/04-Authentication_Testing/06-Testing_for_Browser_Cache_Weaknesses.md)
+- [Testing for Weaker Authentication in Alternative Channel](../4-Pruebas_de_Seguridad_de_aplicaciones_Web/04-Authentication_Testing/10-Testing_for_Weaker_Authentication_in_Alternative_Channel.md)
+- [Testing for Clickjacking](../4-Pruebas_de_Seguridad_de_aplicaciones_Web/11-Client-side_Testing/09-Testing_for_Clickjacking.md)
 
 ### Google Chrome
 

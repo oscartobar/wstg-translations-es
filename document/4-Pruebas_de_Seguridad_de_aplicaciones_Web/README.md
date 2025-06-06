@@ -1,22 +1,22 @@
 # Web Application Security Testing
 
-4.0 [Introduction and Objectives](00-Introduction_and_Objectives/README.md)
+4.0 [Introducción y Objetivos](00-Introduccion_y_Objetivos\README.md)
 
-4.1 [Information Gathering](01-Information_Gathering/README.md)
+4.1 [Recopilación de información](01-Information_Gathering/README.md)
 
-4.2 [Configuration and Deployment Management Testing](02-Configuration_and_Deployment_Management_Testing/README.md)
+4.2 [Pruebas de gestión de configuración e implementación](02-Configuration_and_Deployment_Management_Testing/README.md)
 
-4.3 [Identity Management Testing](03-Identity_Management_Testing/README.md)
+4.3 [Pruebas de gestión de identidad](03-Identity_Management_Testing/README.md)
 
-4.4 [Authentication Testing](04-Authentication_Testing/README.md)
+4.4 [Pruebas de autenticación](04-Authentication_Testing/README.md)
 
-4.5 [Authorization Testing](05-Authorization_Testing/README.md)
+4.5 [Pruebas de autorización](05-Authorization_Testing/README.md)
 
-4.6 [Session Management Testing](06-Session_Management_Testing/README.md)
+4.6 [Pruebas de gestión de sesiones](06-Session_Management_Testing/README.md)
 
-4.7 [Input Validation Testing](07-Input_Validation_Testing/README.md)
+4.7 [Pruebas de validación de entradas](07-Input_Validation_Testing/README.md)
 
-4.8 [Testing for Error Handling](08-Testing_for_Error_Handling/README.md)
+4.8 [Pruebas de Manejo de errores](08-Testing_for_Error_Handling/README.md)
 
 4.9 [Testing for Weak Cryptography](09-Testing_for_Weak_Cryptography/README.md)
 
