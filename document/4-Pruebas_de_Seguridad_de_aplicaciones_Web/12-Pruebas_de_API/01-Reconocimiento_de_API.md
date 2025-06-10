@@ -1,59 +1,59 @@
-# API Reconnaissance
+# Reconocimiento de API
 
-|ID          |
+|ID |
 |------------|
 |WSTG-APIT-01|
 
-## Summary
+## Resumen
 
-Reconnaissance is an important step in any pentesting engagement. This includes API pentesting. Reconnaissance significantly enhances the effectiveness of the testing process by gathering information about the API and developing an understanding of the target. This phase not only increases the likelihood of discovering critical security issues but also ensures a comprehensive evaluation of the APIs' security posture.
+El reconocimiento es un paso importante en cualquier prueba de penetración, incluyendo las pruebas de penetración de API. El reconocimiento mejora significativamente la eficacia del proceso de prueba al recopilar información sobre la API y comprender mejor el objetivo. Esta fase no solo aumenta la probabilidad de descubrir problemas críticos de seguridad, sino que también garantiza una evaluación exhaustiva de la seguridad de las API.
 
-This guide has a section on [Information Gathering](../01-Information_Gathering/README.md) which can apply when auditing APIs. However, there are some differences. As security researchers, we often focus on specific areas and searching this guide for the sections that apply can be time consuming. To ensure the researcher has a single location to focus on APIs this section concentrates on those items that apply to APIs and provides references to supporting content elsewhere in the guide.
+Esta guía incluye una sección sobre [Recopilación de información](../01-Recopilacion_de_informacion/README.md) que puede aplicarse a la auditoría de API. Sin embargo, existen algunas diferencias. Como investigadores de seguridad, a menudo nos centramos en áreas específicas, y buscar en esta guía las secciones pertinentes puede llevar mucho tiempo. Para garantizar que el investigador tenga un único punto de referencia para las API, esta sección se centra en los elementos que se aplican a ellas y proporciona referencias a contenido de apoyo en otras secciones de la guía.
 
-### API Types
+### Tipos de API
 
-APIs can be public or private.
+Las API pueden ser públicas o privadas.
 
-#### Public APIs
+#### API Públicas
 
-Public APIs typically have their details published in a Swagger/OpenAPI document. Gaining access to this document is important to understand the attack surface. Equally important is finding older versions of this document that might show depricated but still functional code that may have security vulnerabilities.
+Las API públicas suelen publicar sus detalles en un documento Swagger/OpenAPI. Acceder a este documento es importante para comprender la superficie de ataque. Igualmente importante es encontrar versiones anteriores de este documento que podrían mostrar código obsoleto, pero aún funcional, con vulnerabilidades de seguridad.
 
-Keep in mind that this document, however well intentioned, may not be accurate, and also may not dislose the complete API.
+Tenga en cuenta que este documento, por muy bien intencionado que sea, puede no ser preciso y no divulgar la API completa.
 
-Public APIs may also be documented on shared libraries or directories of APIs.
+Las API públicas también pueden documentarse en bibliotecas compartidas o directorios de API.
 
-#### Private APIs
+#### API Privadas
 
-The visibility of private APIs depends on who the intended consumer is. An API can be private, but only accessible to subscribed clients (also known as `partners`) or only accessible to internal clients, such as other departments within the same company. Finding private APIs using reconnaissance techniques is also important. These APIs can be discovered using a number of techniques which we will discuss below.
+La visibilidad de las API privadas depende de quién sea el consumidor previsto. Una API puede ser privada, pero solo accesible para clientes suscritos (también conocidos como "socios") o solo para clientes internos, como otros departamentos de la misma empresa. También es importante encontrar API privadas mediante técnicas de reconocimiento. Estas API se pueden descubrir mediante diversas técnicas que explicaremos a continuación.
 
-## Test Objectives
+## Objetivos de la prueba
 
-- Find all API endpoints supported by the backend server code, documented or undocumented.
-- Find all parameters for each endpoint supported by the backend server, documented or undocumented.
-- Discover interesting data related to APIs in HTML and JavaScript sent to clients.
+- Encontrar todos los endpoints de la API compatibles con el código del servidor backend, documentados o no.
+- Encontrar todos los parámetros para cada endpoint compatible con el servidor backend, documentados o no.
+- Descubrir datos interesantes relacionados con las API en HTML y JavaScript enviados a los clientes.
 
-## How to Test
+## Cómo realizar la prueba
 
-### Find the Documentation
+### Encontrar la documentación
 
-In both public and private cases, the API documentation will be useful based on its level of the quality and accurracy. Public API documentaton is typically shared with everyone whereas private API documentation is only shared with the intended client. However, in both cases finding documentation, accidentally leaked or otherwise will be helpfull in your investigation.
+Tanto en casos públicos como privados, la documentación de la API será útil debido a su calidad y precisión. La documentación pública de la API suele compartirse con todos, mientras que la privada solo se comparte con el cliente objetivo. Sin embargo, en ambos casos, encontrar documentación, ya sea filtrada accidentalmente o de otro tipo, será útil en la investigación.
 
-Regardless of the visibility of the API, searching for API documentation can find older, not-yet-published, or accidentally leaked API documentation. This documentation will be very helpfull in understanding what the attack surface the API exposes.
+Independientemente de la visibilidad de la API, buscar documentación de la API puede encontrar documentación antigua, aún no publicada o filtrada accidentalmente. Esta documentación será muy útil para comprender la superficie de ataque que expone la API.
 
-### API Directories
+Directorios de API
 
-Alternatives sources of API documentation can incluide API Directories, such as:
+Otras fuentes alternativas de documentación de API incluyen directorios de API, como:
 
-- GitHub in general
+- GitHub en general
 - [GitHub Public APIs Repository](https://github.com/public-apis/public-apis)
 - [APIs.guru](https://apis.guru)
 - [RapidAPI](https://rapidapi.com/)
 - [PublicAPIs](https://publicapis.dev/) and [PublicAPIs](https://publicapis.io/)
 - [Postman API Network](https://www.postman.com/explore)
 
-### Looking in Well Known Places
+### Búsqueda en sitios conocidos
 
-If documentation is not readily apparent, then you can actively search the target for documentation based on a few obvious names or paths. These include:
+Si la documentación no es evidente, puede buscar activamente documentación en el objetivo basándose en algunos nombres o rutas obvias. Estos incluyen:
 
 - /api-docs
 - /doc
@@ -64,104 +64,108 @@ If documentation is not readily apparent, then you can actively search the targe
 
 ### Robots.txt
 
-`robots.txt` is a text file that site owners create to instruct web crawlers (such as search engine bots) on how to crawl and index their site. It is part of the Robots Exclusion Protocol (REP), which regulates how bots interact with sites.
+`robots.txt` es un archivo de texto que los propietarios de sitios web crean para indicar a los rastreadores web (como los bots de los motores de búsqueda) cómo rastrear e indexar su sitio. Forma parte del Protocolo de Exclusión de Robots (REP), que regula cómo interactúan los bots con los sitios.
 
-This file may provide additional clues to path structure or API endpoints.
+Este archivo puede proporcionar pistas adicionales sobre la estructura de la ruta o los endpoints de la API.
 
-The [Information Gathering](../01-Information_Gathering/README.md) section refers to robots.txt in several cases including WSTG-INFO-01, WSTG-INFO-03, WSTG-INFO-05, and WSTG-INFO-08.
+La sección [Recopilación de Información](../01-Recopilacion_de_informacion/README.md) hace referencia a robots.txt en varios casos, incluyendo WSTG-INFO-01, WSTG-INFO-03, WSTG-INFO-05 y WSTG-INFO-08.
 
 ### GitDorking
 
-If the application uses GitHub, GitLab, or other public facing Git based repositories then we can also search for any clues or sensitive content (also known as `GitDorking`). This information can include passwords, API keys, configuration files, and other confidential data that developers may accidentally or inadvertently commit to their repositories. Organizations can accidentally share sensitive code, sample, or test code that may provide clues to implementation details. The personal GitHub accounts of the target's employees may also accidentally release information that can provide clues.
+Si la aplicación utiliza GitHub, GitLab u otros repositorios públicos basados ​​en Git, también podemos buscar pistas o contenido sensible (también conocido como `GitDorking`). Esta información puede incluir contraseñas, claves de API, archivos de configuración y otros datos confidenciales que los desarrolladores podrían compartir accidental o inadvertidamente en sus repositorios. Las organizaciones pueden compartir accidentalmente código sensible, de muestra o de prueba que podría proporcionar pistas sobre los detalles de la implementación. Las cuentas personales de GitHub de los empleados de la aplicación también podrían publicar accidentalmente información que podría proporcionar pistas.
 
-### Browsing and Spidering the Application
+### Exploración y rastreo de la aplicación
 
-Even if you have the API documentation browsing the application is a good idea. Documentation can be outdated, inaccurate, or incomplete.
+Incluso con la documentación de la API, es recomendable explorar la aplicación. La documentación puede estar desactualizada, ser inexacta o incompleta.
 
-Browsing the application with an intercepting proxy such as ZAP or Burp Suite records endpoints for later inspection. In addition, using their built-in spidering functionality, intercepting proxies can help generate a comprehensive list of endpoints. From the spidered URLs look for links with obvious API URL naming schemes. These include:
+Explorar la aplicación con un proxy de interceptación, como ZAP o Burp Suite, registra los endpoints para su posterior inspección. Además, al usar su funcionalidad de rastreo integrada, los proxies de interceptación pueden ayudar a generar una lista completa de endpoints. En las URL rastreadas, busque enlaces con esquemas de nombres de URL de API obvios. Estos incluyen:
 
-- `https://example.com/api/v1` (or v2 etc)
+- `https://example.com/api/v1` (o v2, etc.)
 - `https://example.com/graphql`
 
-Or subdomains the the applications may consume or depend upon:
+O subdominios que las aplicaciones puedan consumir o de los que dependan:
 
 - `https://api.example.com/api/v1`
 
-It is important that the pentester attempts to exercise as much functionality in the application as possible. This is not only to generate a comprehensive list of endpoints but also to avoid issues with lazy loading and code splitting. In addition, your pentest engagement should include sample accounts at different privilege levels so that your browser and spidering can access and expose endpoints for as much functionality as possible.
+Es importante que el pentester intente ejecutar la mayor cantidad de funcionalidad posible en la aplicación. Esto no solo sirve para generar una lista completa de endpoints, sino también para evitar problemas de carga diferida y división de código. Además, su prueba de penetración debe incluir cuentas de muestra con diferentes niveles de privilegio para que su navegador y el rastreo de datos puedan acceder y exponer los endpoints con la mayor funcionalidad posible.
 
-Once completed, the endpoint information obtained from browsing and spidering of the application can help the pentester compose API documentation of the target using other tools such as Postman.
+Una vez completada, la información de los endpoints obtenida al navegar y rastrear la aplicación puede ayudar al pentester a crear la documentación de la API del objetivo utilizando otras herramientas como Postman.
 
 ### Google Dorking
 
-Using passive reconnaissance techniques such as Google Dorking with directives such as `site` and `inurl` allows us to tailor a search for common API keywords that the Google indexer may have found. Review [Conduct Search Engine Discovery Reconnaissance for Information Leakage](../01-Information_Gathering/01-Conduct_Search_Engine_Discovery_Reconnaissance_for_Information_Leakage.md) for additional information.
+El uso de técnicas de reconocimiento pasivo como Google Dorking con directivas como `site` e `inurl` nos permite personalizar la búsqueda de palabras clave comunes de la API que el indexador de Google pueda haber encontrado. Consulte [Realizar un reconocimiento de descubrimiento en motores de búsqueda para detectar fugas de información].(../01-Recopilacion_de_informacion/01-Reconocimiento_en_motores_de_Busqueda.md) para mas información.
 
-Here are a few API specific examples:
+Aquí hay algunos ejemplos específicos de API:
 
 `site:"mytargetsite.com" inurl:"/api"`
 
 `inurl:apikey filetype:env`
 
-Other keywords can include `"v1"`, `"api"`, `"graphql"`.
+Otras palabras clave pueden incluir `"v1"`, `"api"`, `"graphql"`.
 
-We can extend the Google Dorking to include subdomains of the target.
+Podemos ampliar Google Dorking para incluir subdominios del objetivo.
 
-Wordlists are helpful here for a comprehensive list of common words used in APIs.
+Las listas de palabras son útiles para obtener una lista completa de palabras comunes utilizadas en las API.
 
-### Look Back, Way Back
+### Retrospectiva
 
-In general APIs change over time. But deprecated or older version may still be operational either on purpose or by misconfiguration. These should also be tested as there is a good chance that they will contain vulnerabilities that newer versions have fixed. In addition, changes to APIs show newer features which may be less robust and therefore a good candidate for testing.
+En general, las API cambian con el tiempo. Sin embargo, es posible que versiones obsoletas o antiguas sigan funcionando, ya sea intencionalmente o por una configuración incorrecta. Estas también deben probarse, ya que es muy probable que contengan vulnerabilidades que las versiones más recientes hayan corregido. Además, los cambios en las API muestran características más nuevas que pueden ser menos robustas y, por lo tanto, un buen candidato para las pruebas.
 
-To discover older versions we can use the `Wayback machine` to help find older endpoints. A helpful tool know as TomNomNom's [WayBackUrls](https://github.com/tomnomnom/waybackurls) fetches all the URLs that the Wayback Machine knows about for a domain.
+Para descubrir versiones anteriores, podemos usar la `Wayback Machine` para encontrar endpoints antiguos. Una herramienta útil conocida como TomNomNom [WayBackUrls](https://github.com/tomnomnom/waybackurls) Obtiene todas las URL que Wayback Machine conoce para un dominio..
 
-- [WayBackUrls](https://github.com/tomnomnom/waybackurls). Fetch all the URLs that the Wayback Machine knows about for a domain.
-- [waymore](https://github.com/xnl-h4ck3r/waymore). Find way more from the Wayback Machine, Common Crawl, Alien Vault OTX, URLScan & VirusTotal.
-- [gau](https://github.com/lc/gau). Fetch known URLs from AlienVault's Open Threat Exchange, the Wayback Machine, and Common Crawl.
+- [WayBackUrls](https://github.com/tomnomnom/waybackurls). Obtiene todas las URL que Wayback Machine conoce para un dominio.
+- [waymore](https://github.com/xnl-h4ck3r/waymore). Encuentra mucha más información de Wayback Machine, Common Crawl, Alien Vault OTX, URLScan y VirusTotal.
+- [gau](https://github.com/lc/gau). Obtiene URL conocidas de Open Threat Exchange de AlienVault, Wayback Machine y Common Crawl.
 
-### The Client-Side Application
+### La aplicación del lado del cliente
 
-An excellent source of API and other information is the HTML and JavaScript that the server sends to the client. Sometimes, the client application leaks sensitive information including APIs and secrets. The [Review Web Page Content for Information Leakage](../01-Information_Gathering/05-Review_Web_Page_Content_for_Information_Leakage.md) section has some general information for reviewing web content for leakage. Here we will expand to focus on reviewing the JavaScript content for API related secrets.
+Una excelente fuente de información sobre API y otros datos es el HTML y JavaScript que el servidor envía al cliente. En ocasiones, la aplicación cliente filtra información confidencial, como API y secretos. La sección [Revisar el contenido de la página web para detectar fugas de información](../01-Information_Gathering/05-Review_Web_Page_Content_for_Information_Leakage.md) ofrece información general para revisar el contenido web en busca de fugas. Aquí ampliaremos el tema para centrarnos en la revisión del contenido JavaScript en busca de secretos relacionados con la API.
 
-There are a variety of tools that we can use to help us extract sensitive information from JavaScript transmitted to the browser. These tools are typically based on one of two approaches: Regular Expressions or Abstract Syntax Trees (AST). Then there are generalized tools that help us organize or manage JS files for investigation by AST and Regular Expression tools.
+Existen diversas herramientas que podemos utilizar para extraer información confidencial del JavaScript transmitido al navegador. Estas herramientas suelen basarse en uno de dos enfoques: expresiones regulares o árboles de sintaxis abstracta (AST). También existen herramientas generalizadas que nos ayudan a organizar o gestionar archivos JS para su análisis mediante AST y herramientas de expresiones regulares.
 
-Regex is more straightforward by searching JS or HTML content for known patterns. However, this approach can miss content not explicitly identified in the Regular Expression. Given the structure of some JS this approach can miss a lot. ASTs on the other hand are tree-like structures that represent the syntax of source code. Each node in the tree corresponds to a part of the code. For JavaScript, an AST breaks the code into basic components, allowing tools and compilers to understand and modify the code easily.
+Las expresiones regulares son más sencillas al buscar patrones conocidos en contenido JS o HTML. Sin embargo, este enfoque puede pasar por alto contenido no identificado explícitamente en la expresión regular. Dada la estructura de algunos JS, este enfoque puede pasar por alto muchos aspectos. Los AST, por otro lado, son estructuras tipo árbol que representan la sintaxis del código fuente. Cada nodo del árbol corresponde a una parte del código. En JavaScript, un AST divide el código en componentes básicos, lo que permite que las herramientas y compiladores lo comprendan y modifiquen fácilmente.
 
-#### General Tools
+#### Herramientas generales
 
-1. [Uproot](https://github.com/0xDexter0us/uproot-JS). A BurpSuite plugin that saves any encountered JS files to disk. This helps extract the files for any analysis by command-line tools.
-2. [OpenAPI Support](https://www.zaproxy.org/docs/desktop/addons/openapi-support/). This ZAP add-on allows you to spider and import OpenAPI (Swagger) definitions, versions 1.2, 2.0, and 3.0.
-3. [OpenAPI Parser](https://github.com/aress31/openapi-parser). A BurpSuite plugin that parses OpenAPI documents into Burp Suite for automating OpenAPI-based APIs security assessments.
+1. [Uproot](https://github.com/0xDexter0us/uproot-JS). Un plugin de BurpSuite que guarda en disco los archivos JS encontrados. Esto ayuda a extraer los archivos para su análisis mediante herramientas de línea de comandos.
 
-#### Regular Expression Tools
+2. [OpenAPI Support](https://www.zaproxy.org/docs/desktop/addons/openapi-support/). Este complemento de ZAP permite rastrear e importar definiciones de OpenAPI (Swagger), versiones 1.2, 2.0 y 3.0. 3. [Analizador OpenAPI](https://github.com/aress31/openapi-parser). Un plugin de BurpSuite que analiza documentos OpenAPI en BurpSuite para automatizar las evaluaciones de seguridad de las API basadas en OpenAPI.
 
-1. [JSParser](https://github.com/nahamsec/JSParser). A python 2.7 script using Tornado and JSBeautifier to parse relative URLs from JavaScript files.
-2. [JSMiner](https://github.com/PortSwigger/js-miner). A BurpSuite plugin tries to find interesting stuff inside static files; mainly JavaScript and JSON files. This tool scans "passively" while crawling the application.
-3. [JSpector](https://github.com/hisxo/JSpector). A BurpSuite plugin that passively crawls JavaScript files and automatically creates issues with URLs, endpoints and dangerous methods found on the JS files.
-4. [Link Finder](https://github.com/GerbenJavado/LinkFinder). A python script that finds endpoints in JavaScript files.
+#### Herramientas de expresiones regulares
 
-#### AST Tools
+1. [JSParser](https://github.com/nahamsec/JSParser). Un script de Python 2.7 que usa Tornado y JSBeautifier para analizar URL relativas de archivos JavaScript.
 
-1. [JSLuice](https://github.com/BishopFox/jsluice). A command-line tool that extracts URLs, paths, secrets, and other interesting data from JavaScript source code.
+2. [JSMiner](https://github.com/PortSwigger/js-miner). Un plugin de BurpSuite que busca información interesante dentro de archivos estáticos, principalmente archivos JavaScript y JSON. Esta herramienta escanea pasivamente mientras rastrea la aplicación.
 
-### Other Recon Tools
+3. [JSpector](https://github.com/hisxo/JSpector). Un plugin de BurpSuite que rastrea pasivamente archivos JavaScript y crea automáticamente problemas con URL, endpoints y métodos peligrosos encontrados en los archivos JS.
 
-1. [Attack Surface Detector](https://github.com/secdec/attack-surface-detector-burp). A BurpSuite plugin that uses static code analyses to identify web app endpoints by parsing routes and identifying parameters.
-2. [Param Miner](https://github.com/portswigger/param-miner). A BurpSuite plugin that identifies hidden, unlinked parameters.
-3. [xnLinkFinder](https://github.com/xnl-h4ck3r/xnLinkFinder). A python tool used to discover endpoints, potential parameters, and a target specific wordlist for a given target.
-4. [GAP](https://github.com/xnl-h4ck3r/GAP-Burp-Extension). Burp Extension to find potential endpoints, parameters, and generate a custom target wordlist.
+4. [Buscador de enlaces](https://github.com/GerbenJavado/LinkFinder). Un script de Python que encuentra endpoints en archivos JavaScript.
 
-### Active Fuzzing
+#### Herramientas AST
 
-Active Fuzzing involves using tools with wordlists and filtering requests results to bruteforce endpoint discovery.
+1. [JSLuice](https://github.com/BishopFox/jsluice). Una herramienta de línea de comandos que extrae URL, rutas, secretos y otros datos interesantes del código fuente de JavaScript.
+
+### Otras herramientas de reconocimiento
+
+1. [Detector de superficie de ataque](https://github.com/secdec/attack-surface-detector-burp). Un plugin de BurpSuite que utiliza análisis de código estático para identificar endpoints de aplicaciones web mediante el análisis de rutas y la identificación de parámetros.
+
+2. [Minero de parámetros](https://github.com/portswigger/param-miner). Un plugin de BurpSuite que identifica parámetros ocultos y no vinculados.
+3. [xnLinkFinder](https://github.com/xnl-h4ck3r/xnLinkFinder). Una herramienta de Python que se utiliza para descubrir endpoints, parámetros potenciales y una lista de palabras específica para un objetivo determinado.
+4. [GAP](https://github.com/xnl-h4ck3r/GAP-Burp-Extension). Una extensión de Burp que busca endpoints potenciales, parámetros y genera una lista de palabras personalizada.
+
+### Fuzzing Activo
+
+El fuzzing activo implica el uso de herramientas con listas de palabras y el filtrado de resultados de solicitudes para forzar la detección de endpoints.
 
 #### Kiterunner
 
-[KiteRunner](https://github.com/assetnote/kiterunner) is a tool that performs traditional content discovery and bruteforcing routes/endpoints in modern applications and APIs.
+[KiteRunner](https://github.com/assetnote/kiterunner) es una herramienta que realiza el descubrimiento de contenido tradicional y fuerza bruta en rutas/endpoints en aplicaciones y API modernas.
 
 ```console
 kr [scan|brute] <input> [flags]
 ```
 
-To scan a target for APIs using a wordlist we can:
+Para escanear un objetivo en busca de API usando una lista de palabras, podemos:
 
 ```console
 kr scan https://example.com/api -w /usr/share/wordlists/apis/routes-large.kite --fail-status-codes 404,403
@@ -169,21 +173,20 @@ kr scan https://example.com/api -w /usr/share/wordlists/apis/routes-large.kite -
 
 #### FFUF/DirBuster/GoBuster
 
-All three of FFUF, DirBuster, and GoBuster are designed to discover hidden paths and files on web servers through brute-forcing techniques. All three use customizable wordlists to generate requests to the target web server, attempting to identify valid directories and files. All three support multi-threaded or highly efficient processing to speed up the brute-forcing process.
+FFUF, DirBuster y GoBuster están diseñados para descubrir rutas y archivos ocultos en servidores web mediante técnicas de fuerza bruta. Los tres utilizan listas de palabras personalizables para generar solicitudes al servidor web de destino, intentando identificar directorios y archivos válidos. Los tres admiten procesamiento multihilo o de alta eficiencia para acelerar el proceso de fuerza bruta.
 
-Some common wordlist files for APIs include: [SecLists](https://github.com/danielmiessler/SecLists) in the Discovery/Web-Content/api section, [GraphQL Wordlist](https://github.com/Escape-Technologies/graphql-wordlist), and [Assetnote](https://wordlists.assetnote.io/).
+Algunos archivos de listas de palabras comunes para API incluyen: [SecLists](https://github.com/danielmiessler/SecLists) en la sección Discovery/Web-Content/api, [GraphQL Wordlist](https://github.com/Escape-Technologies/graphql-wordlist) y [Assetnote](https://wordlists.assetnote.io/).
 
-GoBuster Example:
+Ejemplo de GoBuster:
 
 `gobuster dir -u <target url> -w <wordlist file>`
 
-## References
-
-### OWASP Resources
+## Referencias
+### OWASP Recursos
 
 - [REST Assessment Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/REST_Assessment_Cheat_Sheet.html)
 
-### Books
+### Libros
 
 - Corey J. Ball - "Hacking APIs : breaking web application programming interfaces", No Starch, 2022 - ISBN-13: 978-1-7185-0244-4
 - Confidence Staveley - "API Security for White Hat Hackers, Packt, 2024 - ISBN 978-1-80056-080-2  
