@@ -1,85 +1,84 @@
-# API Broken Object Level Authorization
+# Autorización a Nivel de Objeto Incorrecta de la API
 
-|ID          |
+|ID |
 |------------|
 |WSTG-APIT-02|
 
-## Summary
+## Resumen
 
-Broken Object Level Authorization (BOLA) occurs when an API does not properly enforce authorization checks for each object accessed by the client. Attackers can manipulate object identifiers in API requests (such as IDs, GUIDs, or tokens) to access or modify resources they are not authorized to. This vulnerability is critical in APIs due to their direct access to underlying objects and the prevalence of APIs in modern applications.
+La Autorización a Nivel de Objeto Incorrecta (BOLA) se produce cuando una API no aplica correctamente las comprobaciones de autorización para cada objeto al que accede el cliente. Los atacantes pueden manipular los identificadores de objeto en las solicitudes de la API (como ID, GUID o tokens) para acceder o modificar recursos a los que no están autorizados. Esta vulnerabilidad es crítica en las API debido a su acceso directo a los objetos subyacentes y a su prevalencia en las aplicaciones modernas.
 
-Exploiting BOLA can lead to unauthorized access to sensitive data, user impersonation, horizontal privilege escalation (accessing other users' resources), and vertical privilege escalation (gaining unauthorized admin-level access).
+La explotación de BOLA puede provocar acceso no autorizado a datos confidenciales, suplantación de identidad de usuarios, escalada horizontal de privilegios (acceso a los recursos de otros usuarios) y escalada vertical de privilegios (obtención de acceso no autorizado a nivel de administrador).
 
-## Test Objectives
+## Objetivos de la prueba
 
-- The objective of this test is to identify whether the API enforces proper **object-level authorization** checks, ensuring that users can only access and manipulate objects they are authorized to interact with.
+- El objetivo de esta prueba es identificar si la API aplica las comprobaciones de **autorización a nivel de objeto** adecuadas, garantizando que los usuarios solo puedan acceder y manipular los objetos con los que están autorizados a interactuar.
 
-## How to Test
+## Cómo realizar pruebas
 
-### Understand API Endpoints and Object References
+### Comprender los puntos finales de la API y las referencias a objetos
 
-Review API documentation (e.g. OpenAPI specification), traffic, or use an interception proxy (e.g., **Burp Suite**, **ZAP**) to identify endpoints that accept object identifiers of interest. These could be in the form of **IDs**, **UUIDs**, or other references.
+Revise la documentación de la API (p. ej., la especificación de OpenAPI), el tráfico o utilice un proxy de interceptación (p. ej., **Burp Suite**, **ZAP**) para identificar los puntos finales que aceptan identificadores de objeto de interés. Estos pueden ser **ID**, **UUID** u otras referencias.
 
-Examples:
+Ejemplos:
 
 - `GET /api/users/{user_id}`
 - `GET /api/orders/{order_id}`
 - `POST /graphql`\
-        `query: {user(id: "123") }`
+`query: {user(id: "123") }`
 
-With the knowledge gained in the previous step, review and collect third-party object identifiers (e.g. user IDs, orders IDs etc) that can be used subsequently in the object identifiers manipulation.
+Con los conocimientos adquiridos en el paso anterior, revise y recopile identificadores de objeto de terceros (p. ej., ID de usuario, ID de pedido, etc.) que puedan utilizarse posteriormente en la manipulación de identificadores de objeto.
 
-Additionaly, generate a list of potential object identifiers for brute-force. For example, if an API is retrieving a purchase order from an authenticated user, generate various purchase order IDs for testing.
+Además, genere una lista de posibles identificadores de objeto para ataques de fuerza bruta. Por ejemplo, si una API recupera una orden de compra de un usuario autenticado, genere varios ID de orden de compra para realizar pruebas.
 
-### Manipulate Object Identifiers in API Requests
+### Manipular identificadores de objetos en solicitudes de API
 
-With the goal to determine if users can access or modify objects they do not own by altering object identifiers in API request, change the object identifier (e.g., user ID, order ID) in the URL or request body.
-  
-Example: Modify a request like `GET /api/users/123/profile` (where 123 is the current user ID) to `GET /api/users/124/profile` (where 124 is another user's ID).
+Para determinar si los usuarios pueden acceder o modificar objetos que no les pertenecen modificando los identificadores de objeto en la solicitud de API, cambie el identificador de objeto (p. ej., ID de usuario, ID de orden) en la URL o el cuerpo de la solicitud.
 
-Depending on the application context, utilize two different accounts to perform the tests. With an account A, create resources that exclusively belongs to that account (e.g. purchase order) and with an account B, try to access the resource from account A (e.g. purchase order).
+Ejemplo: Modifique una solicitud como `GET /api/users/123/profile` (donde 123 es el ID de usuario actual) a `GET /api/users/124/profile` (donde 124 es el ID de otro usuario).
 
-### Test Object-Level Access with Different HTTP Methods
+Según el contexto de la aplicación, utilice dos cuentas diferentes para realizar las pruebas. Con la cuenta A, cree recursos que pertenezcan exclusivamente a esa cuenta (p. ej., una orden de compra) y con la cuenta B, intente acceder al recurso desde la cuenta A (p. ej., una orden de compra).
 
-Test various **HTTP methods** for BOLA vulnerabilities:
+### Prueba de acceso a nivel de objeto con diferentes métodos HTTP
 
-- **GET**: Try accessing unauthorized objects by manipulating the object ID in the request.
-- **POST/PUT/PATCH**: Attempt to create or modify objects that belong to other users.
-- **DELETE**: Try to delete an object owned by another user.
+Prueba varios **métodos HTTP** para detectar vulnerabilidades BOLA:
 
-### Test BOLA in GraphQL APIs
+- **GET**: Intenta acceder a objetos no autorizados manipulando el ID del objeto en la solicitud.
+- **POST/PUT/PATCH**: Intenta crear o modificar objetos que pertenecen a otros usuarios.
+- **DELETE**: Intenta eliminar un objeto propiedad de otro usuario.
 
-For **GraphQL APIs**, send a query with a modified object ID in the query parameters (see [Testing GraphQL](https://owasp.org/www-project-web-security-testing-guide/stable/4-Pruebas_de_Seguridad_de_aplicaciones_Web/12-API_Testing/01-Testing_GraphQL)):
+### Prueba de BOLA en las API de GraphQL
 
-Example: `query { user(id: "124") { name, email } }`.
+Para las **API de GraphQL**, envíe una consulta con un ID de objeto modificado en los parámetros de consulta (consulte [Pruebas de GraphQL](https://owasp.org/www-project-web-security-testing-guide/stable/4-Pruebas_de_Seguridad_de_aplicaciones_Web/12-API_Testing/01-Testing_GraphQL)):
 
-### Test for Bulk Object Access
+Ejemplo: `query { user(id: "124") { name, email } }`.
 
-Test if the API allows unauthorized **bulk access** to objects. This could happen in endpoints that return lists of objects.
+### Prueba de acceso masivo a objetos
 
-Example: `GET /api/users` returns data for all users instead of only the authenticated user’s data.
+Comprueba si la API permite el **acceso masivo** no autorizado a los objetos. Esto podría ocurrir en endpoints que devuelven listas de objetos.
 
-## Indicators of BOLA
+Ejemplo: `GET /api/users` devuelve datos de todos los usuarios en lugar de solo los datos del usuario autenticado.
 
-- **Successful exploitation**: If modifying an object ID in the request returns data or allows actions on objects that belong to other users, the API is vulnerable to BOLA.
-- **Error responses**: Properly secured APIs in general would return `403 Forbidden` or `401 Unauthorized` for unauthorized object access. A `200 OK` response for another user's object indicates BOLA.
-- **Inconsistent responses**: If some endpoints enforce authorization and others do not, it points to incomplete or inconsistent security controls.
+## Indicadores de BOLA
 
-## Remediation
+- **Explotación exitosa**: Si al modificar el ID de un objeto en la solicitud se devuelven datos o se permiten acciones en objetos que pertenecen a otros usuarios, la API es vulnerable a BOLA.
+- **Respuestas de error**: Las API con la seguridad adecuada generalmente devolverían un error `403 Prohibido` o `401 No autorizado` para el acceso no autorizado a objetos. Una respuesta `200 OK` para el objeto de otro usuario indica BOLA.
+- **Respuestas inconsistentes**: Si algunos endpoints aplican la autorización y otros no, esto indica controles de seguridad incompletos o inconsistentes.
 
-- **Object Ownership Checks**: Ensure that object-level authorization checks are performed for every API request. Always verify that the user making the request is authorized to access the requested object.
-- **Role-Based Access Control (RBAC)**: Implement RBAC policies that define which roles can access or modify specific objects.
-- **Least Privilege Principle**: Apply the principle of least privilege to ensure that users can only access the minimum set of objects they need for their role.
-- **Use UUIDs or Non-Sequential IDs**: Prefer non-predictable, non-sequential object identifiers (e.g., **UUIDs** instead of simple integers) to make enumeration and brute-force attacks harder.
+## Solución
 
-## Tools
+- **Verificaciones de propiedad de objetos**: Asegúrese de que se realicen verificaciones de autorización a nivel de objeto para cada solicitud de API. Verifique siempre que el usuario que realiza la solicitud esté autorizado para acceder al objeto solicitado.
+- **Control de acceso basado en roles (RBAC)**: Implemente políticas de RBAC que definan qué roles pueden acceder o modificar objetos específicos. - **Principio de Mínimo Privilegio**: Aplique el principio de mínimo privilegio para garantizar que los usuarios solo puedan acceder al conjunto mínimo de objetos necesarios para su rol.
+- **Usar UUID o IDs no secuenciales**: Prefiera identificadores de objetos no predecibles ni secuenciales (por ejemplo, **UUID** en lugar de enteros simples) para dificultar la enumeración y los ataques de fuerza bruta.
 
-- **ZAP**: Automated scanners or manual proxy tools can help test object references in API requests.
-- **Burp Suite**: Use the **Repeater** or **Intruder** tools to manipulate object IDs and send multiple requests to test access control.
-- **Postman**: Send requests with altered object IDs and observe the responses.
-- **Fuzzing Tools**: Use fuzzers to brute-force object IDs and check for unauthorized access.
+## Herramientas
 
-## References
+- **ZAP**: Los escáneres automatizados o las herramientas de proxy manuales pueden ayudar a probar las referencias de objetos en las solicitudes de API.
+- **Burp Suite**: Use las herramientas **Repeater** o **Intruder** para manipular los IDs de objetos y enviar múltiples solicitudes para probar el control de acceso.
+- **Postman**: Envíe solicitudes con IDs de objetos modificados y observe las respuestas.
+- **Herramientas de Fuzzing**: Use fuzzers para realizar un análisis de fuerza bruta de los IDs de objetos y comprobar si hay accesos no autorizados.
+
+## Referencias
 
 - [OWASP API Security Top 10: BOLA](https://owasp.org/API-Security/editions/2023/en/0xa1-broken-object-level-authorization/)
 - [OWASP Testing Guide: Testing for Insecure Direct Object References (IDOR)](https://owasp.org/www-project-web-security-testing-guide/stable/4-Pruebas_de_Seguridad_de_aplicaciones_Web/05-Authorization_Testing/04-Testing_for_Insecure_Direct_Object_References)
