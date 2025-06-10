@@ -1,22 +1,21 @@
 # 4.1 Information Gathering
 
-4.1.1 [Realizar un reconocimiento de motores de búsqueda para detectar fugas de información](01-
-reconocimiento_de_motores_de_busqueda_para_detectar_fugas_de_informacion.md)
+4.1.1 [Realizar Reconocimiento de Descubrimiento de Motores de Búsqueda para Detectar Fugas de Información](01-reconocimiento_de_motores_de_busqueda_para_detectar_fugas_de_informacion.md)
 
-4.1.2 [Fingerprint Web Server](02-Fingerprint_Web_Server.md)
+4.1.2 [Huella digital del servidor web](02-Huella_del_Servidor_web.md)
 
-4.1.3 [Review Webserver Metafiles for Information Leakage](03-Review_Webserver_Metafiles_for_Information_Leakage.md)
+4.1.3 [Revisar los metarchivos del servidor web para detectar fugas de información](03-Revisar_los_metarchivos_del_servidor_web_para_detectar_fugas.md)
 
-4.1.4 [Enumerate Applications on Webserver](04-Enumerate_Applications_on_Webserver.md)
+4.1.4 [Enumerar aplicaciones en el servidor web](04-Enumerate_Applications_on_Webserver.md)
 
-4.1.5 [Review Web Page Content for Information Leakage](05-Review_Web_Page_Content_for_Information_Leakage.md)
+4.1.5 [Revisar el contenido de la página web para detectar fugas de información](05-Review_Web_Page_Content_for_Information_Leakage.md)
 
-4.1.6 [Identify Application Entry Points](06-Identify_Application_Entry_Points.md)
+4.1.6 [Identificar los puntos de entrada de la aplicación](06-Identify_Application_Entry_Points.md)
 
-4.1.7 [Map Execution Paths Through Application](07-Map_Execution_Paths_Through_Application.md)
+4.1.7 [Mapear rutas de ejecución a través de la aplicación](07-Map_Execution_Paths_Through_Application.md)
 
-4.1.8 [Fingerprint Web Application Framework](08-Fingerprint_Web_Application_Framework.md)
+4.1.8 [Huella del Web Framework](08-Fingerprint_Web_Application_Framework.md)
 
-4.1.9 [Fingerprint Web Application](09-Fingerprint_Web_Application.md)
+4.1.9 [Huella de la Aplicación Web](09-Fingerprint_Web_Application.md)
 
-4.1.10 [Map Application Architecture](10-Map_Application_Architecture.md)
+4.1.10 [Mapa de Arquitectura de la aplicación](10-Map_Application_Architecture.md)
