@@ -1,27 +1,28 @@
-# Review Webserver Metafiles for Information Leakage
+# Revisar los metarchivos del servidor web para detectar fugas de información
 
-|ID          |
+|ID |
 |------------|
 |WSTG-INFO-03|
 
-## Summary
+## Resumen
 
-This section describes how to test various metadata files for information leakage of the web application's path(s), or functionality. Furthermore, the list of directories that are to be avoided by Spiders, Robots, or Crawlers can also be created as a dependency for [Map execution paths through application](07-Map_Execution_Paths_Through_Application.md). Other information may also be collected to identify attack surface, technology details, or for use in social engineering engagement.
+Esta sección describe cómo probar varios archivos de metadatos para detectar fugas de información en las rutas o funcionalidades de la aplicación web. Además, la lista de directorios que deben evitar las arañas, robots o rastreadores también puede crearse como dependencia de [Mapear rutas de ejecución a través de la aplicación](07-Map_Execution_Paths_Through_Application.md). También se puede recopilar otra información para identificar la superficie de ataque, detalles tecnológicos o para su uso en estrategias de ingeniería social.
 
-## Test Objectives
+## Objetivos de la prueba
 
-- Identify hidden or obfuscated paths and functionality through the analysis of metadata files.
-- Extract and map other information that could lead to a better understanding of the systems at hand.
+- Identificar rutas y funcionalidades ocultas u ofuscadas mediante el análisis de los archivos de metadatos.
+- Extraer y mapear otra información que pueda ayudar a comprender mejor los sistemas en cuestión.
 
-## How to Test
+## Cómo realizar la prueba
 
-> Any of the actions performed below with `wget` could also be done with `curl`. Many Dynamic Application Security Testing (DAST) tools such as ZAP and Burp Suite include checks or parsing for these resources as part of their spider/crawler functionality. They can also be identified using various [Google Dorks](https://en.wikipedia.org/wiki/Google_hacking) or leveraging advanced search features such as `inurl:`.
+> Cualquiera de las acciones realizadas a continuación con `wget` también puede realizarse con `curl`. Muchas herramientas de Pruebas Dinámicas de Seguridad de Aplicaciones (DAST), como ZAP y Burp Suite, incluyen comprobaciones o análisis de estos recursos como parte de su funcionalidad de araña/rastreador. También se pueden identificar utilizando varios [Google Dorks](https://en.wikipedia.org/wiki/Google_hacking) o aprovechando funciones de búsquedas avanzadas como `inurl:`.
+
 
 ### Robots
 
-Web Spiders, Robots, or Crawlers retrieve a web page and then recursively traverse hyperlinks to retrieve further web content. Their accepted behavior is specified by the [Robots Exclusion Protocol](https://www.robotstxt.org) of the [robots.txt](https://www.robotstxt.org/) file in the web root directory.
+Las arañas web, robots o rastreadores recuperan una página web y luego recorren recursivamente los hipervínculos para recuperar más contenido. Su comportamiento aceptado está especificado por el [Robots Exclusion Protocol](https://www.robotstxt.org) de el archivo [robots.txt](https://www.robotstxt.org/) en el directorio raíz web.
 
-As an example, the beginning of the `robots.txt` file from [Google](https://www.google.com/robots.txt) sampled on 2020 May 5 is quoted below:
+A modo de ejemplo, se cita a continuación el inicio del archivo `robots.txt` de [Google](https://www.google.com/robots.txt), muestreado el 5 de mayo de 2020:
 
 ```text
 User-agent: *
@@ -33,9 +34,9 @@ Disallow: /sdch
 ...
 ```
 
-The [User-Agent](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/User-Agent) directive refers to the specific web spider/robot/crawler. For example, the `User-Agent: Googlebot` refers to the spider from Google while `User-Agent: bingbot` refers to a crawler from Microsoft. `User-Agent: *` in the example above applies to all [web spiders/robots/crawlers](https://support.google.com/webmasters/answer/6062608?visit_id=637173940975499736-3548411022&rd=1).
+La directiva [User-Agent](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/User-Agent)  se refiere a la araña, robot o rastreador web específico. Por ejemplo, «User-Agent: Googlebot» se refiere a la araña de Google, mientras que «User-Agent: bingbot» se refiere a un rastreador de Microsoft. «User-Agent: *» en el ejemplo anterior se aplica a todos los [web spiders/robots/crawlers](https://support.google.com/webmasters/answer/6062608?visit_id=637173940975499736-3548411022&rd=1).
 
-The `Disallow` directive specifies which resources are prohibited by spiders/robots/crawlers. In the example above, the following are prohibited:
+La directiva `Disallow` especifica qué recursos están prohibidos por arañas, robots o rastreadores. En el ejemplo anterior, se prohíben los siguientes:
 
 ```text
 ...
@@ -45,9 +46,9 @@ Disallow: /sdch
 ...
 ```
 
-Web spiders/robots/crawlers can [intentionally ignore](https://blog.isc2.org/isc2_blog/2008/07/the-attack-of-t.html) the `Disallow` directives specified in a `robots.txt` file. Hence, `robots.txt` should not be considered as a mechanism to enforce restrictions on how web content is accessed, stored, or republished by third parties.
+Las arañas/robots/rastreadores web pueden [ignorar intencionalmente](https://blog.isc2.org/isc2_blog/2008/07/the-attack-of-t.html) las directivas «Disallow» especificadas en un archivo «robots.txt». Por lo tanto, «robots.txt» no debe considerarse un mecanismo para imponer restricciones sobre cómo terceros acceden, almacenan o republican el contenido web.
 
-The `robots.txt` file is retrieved from the web root directory of the web server. For example, to retrieve the `robots.txt` from `www.google.com` using `wget` or `curl`:
+El archivo `robots.txt` se recupera del directorio raíz del servidor web. Por ejemplo, para recuperar `robots.txt` de `www.google.com` usando `wget` o `curl`:
 
 ```bash
 $ curl -O -Ss https://www.google.com/robots.txt && head -n5 robots.txt
@@ -59,27 +60,27 @@ Allow: /search/howsearchworks
 ...
 ```
 
-#### Analyze robots.txt Using Google Webmaster Tools
+#### Analizar robots.txt con las Herramientas para webmasters de Google
 
-Site owners can use the Google "Analyze robots.txt" function to analyze the site as part of its [Google Webmaster Tools](https://www.google.com/webmasters/tools). This tool can assist with testing and the procedure is as follows:
+Los propietarios de sitios web pueden usar la función "Analizar robots.txt" de Google para analizar el sitio como parte de sus Herramientas para webmasters de Google (https://www.google.com/webmasters/tools). Esta herramienta puede ayudar con las pruebas y el procedimiento es el siguiente:
 
-1. Sign into Google Webmaster Tools with a Google account.
-2. On the dashboard, enter the URL for the site to be analyzed.
-3. Choose between the available methods and follow the on screen instruction.
+1. Inicia sesión en Herramientas para webmasters de Google con una cuenta de Google.
+2. En el panel de control, introduce la URL del sitio que se va a analizar.
+3. Elige entre los métodos disponibles y sigue las instrucciones en pantalla.
 
-### META Tags
+### Etiquetas META
 
-`<META>` tags are located within the `HEAD` section of each HTML document and should be consistent across a site in the event that the robot/spider/crawler start point does not begin from a document link other than webroot i.e. a [deep link](https://en.wikipedia.org/wiki/Deep_linking). The Robots directive can also be specified using a specific [META tag](https://www.robotstxt.org/meta.html).
+Las etiquetas `<META>` se encuentran en la sección `HEAD` de cada documento HTML y deben ser coherentes en todo el sitio web en caso de que el punto de inicio del robot/araña/rastreador no comience desde un enlace del documento que no sea la raíz web, es decir, un [deep link](https://en.wikipedia.org/wiki/Deep_linking). La directiva Robots también se puede especificar utilizando un [META tag](https://www.robotstxt.org/meta.html).
 
-#### Robots META Tag
+#### Etiqueta META de Robots
 
-If there is no `<META NAME="ROBOTS" ... >` entry, then the "Robots Exclusion Protocol" defaults to `INDEX,FOLLOW` respectively. Therefore, the other two valid entries defined by the "Robots Exclusion Protocol" are prefixed with `NO...` i.e. `NOINDEX` and `NOFOLLOW`.
+Si no existe la entrada `<META NAME="ROBOTS" ... >`, el "Protocolo de Exclusión de Robots" toma por defecto `INDEX,FOLLOW`, respectivamente. Por lo tanto, las otras dos entradas válidas definidas por el "Protocolo de Exclusión de Robots" tienen el prefijo `NO...`, es decir, `NOINDEX` y `NOFOLLOW`.
 
-Based on the Disallow directive(s) listed within the `robots.txt` file in webroot, a regular expression search for `<META NAME="ROBOTS"` is undertaken within each web page. The result is then compared to the robots.txt file in the webroot.
+Según las directivas "Disallow" del archivo `robots.txt` en la raíz web, se realiza una búsqueda de `<META NAME="ROBOTS"` en cada página web. El resultado se compara con el archivo robots.txt en la raíz web.
 
-#### Miscellaneous META Information Tags
+Etiquetas de información META miscelánea
 
-Organizations often embed informational META tags in web content to support various technologies such as screen readers, social networking previews, search engine indexing, etc. Such meta-information can be of value to testers in identifying technologies used, and additional paths/functionality to explore and test. The following meta information was retrieved from `www.whitehouse.gov` via View Page Source on 2020 May 05:
+Las organizaciones suelen incorporar etiquetas META informativas en el contenido web para facilitar diversas tecnologías, como lectores de pantalla, vistas previas de redes sociales, indexación en motores de búsqueda, etc. Esta metainformación puede ser útil para los evaluadores, ya que les permite identificar las tecnologías utilizadas y las rutas/funciones adicionales que explorar y probar. La siguiente metainformación se obtuvo de `www.whitehouse.gov` a través de Ver código fuente de la página el 5 de mayo de 2020:
 
 ```html
 ...
@@ -106,11 +107,11 @@ Organizations often embed informational META tags in web content to support vari
 ...
 ```
 
-### Sitemaps
+### Mapas del sitio
 
-A sitemap is a file where a developer or organization can provide information about the pages, videos, and other files offered by the site or application, and the relationship between them. Search engines can use this file to navigate your site more efficiently. Likewise, testers can utilize 'sitemap.xml' files to gain deeper insights into the site or application under investigation.
+Un mapa del sitio es un archivo donde un desarrollador u organización puede proporcionar información sobre las páginas, los vídeos y otros archivos que ofrece el sitio o la aplicación, y la relación entre ellos. Los motores de búsqueda pueden usar este archivo para navegar por el sitio de forma más eficiente. Asimismo, los evaluadores pueden utilizar los archivos 'sitemap.xml' para obtener información más detallada sobre el sitio o la aplicación investigada.
 
-The following excerpt is from Google's primary sitemap retrieved 2020 May 05.
+El siguiente extracto proviene del mapa del sitio principal de Google, recuperado el 5 de mayo de 2020.
 
 ```bash
 $ wget --no-verbose https://www.google.com/sitemap.xml && head -n8 sitemap.xml
@@ -127,7 +128,7 @@ $ wget --no-verbose https://www.google.com/sitemap.xml && head -n8 sitemap.xml
 ...
 ```
 
-Exploring from there a tester may wish to retrieve the gmail sitemap `https://www.google.com/gmail/sitemap.xml`:
+Al explorar desde allí, un evaluador podría desear recuperar el mapa del sitio de Gmail `https://www.google.com/gmail/sitemap.xml`:
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -143,19 +144,20 @@ Exploring from there a tester may wish to retrieve the gmail sitemap `https://ww
 
 ### Security TXT
 
-[security.txt](https://securitytxt.org) was ratified by the IETF as [RFC 9116 - A File Format to Aid in Security Vulnerability Disclosure](https://www.rfc-editor.org/rfc/rfc9116.html) which allows sites to define security policies and contact details. There are multiple reasons why this might be of interest in testing scenarios, which include, but are not limited to:
+[security.txt](https://securitytxt.org) fue ratificado por el IETF como [RFC 9116 - Un formato de archivo para facilitar la divulgación de vulnerabilidades de seguridad](https://www.rfc-editor.org/rfc/rfc9116.html), que permite a los sitios web definir políticas de seguridad y datos de contacto. Existen múltiples razones por las que esto podría ser interesante en escenarios de prueba, entre ellas:
 
-- Identifying further paths or resources to include in discovery/analysis.
-- Open Source intelligence gathering.
-- Finding information on Bug Bounties, etc.
-- Social Engineering.
+- Identificar rutas o recursos adicionales para incluir en el descubrimiento/análisis.
+- Recopilación de inteligencia de código abierto.
+- Encontrar información sobre recompensas por errores, etc.
+- Ingeniería social.
 
-The file may be present either in the root of the webserver or in the `.well-known/` directory, for example:
+El archivo puede estar presente en la raíz del servidor web o en el directorio `.well-known/`, por ejemplo:
 
 - `https://example.com/security.txt`
 - `https://example.com/.well-known/security.txt`
 
-Here is a real world example retrieved from LinkedIn 2020 May 05:
+A continuación, se muestra un ejemplo real obtenido de LinkedIn el 5 de mayo de 2020:
+
 
 ```bash
 $ wget --no-verbose https://www.linkedin.com/.well-known/security.txt && cat security.txt
@@ -168,21 +170,22 @@ Canonical: https://www.linkedin.com/.well-known/security.txt
 Policy: https://www.linkedin.com/help/linkedin/answer/62924
 ```
 
-OpenPGP Public Keys contain some metadata that can provide information about the key itself. Here are some common metadata elements that can be extracted from an OpenPGP Public Key:
+Las claves públicas OpenPGP contienen metadatos que proporcionan información sobre la clave. A continuación, se presentan algunos elementos de metadatos comunes que se pueden extraer de una clave pública OpenPGP:
 
-- **Key ID**: The Key ID is a short identifier derived from the public key material. It helps identify the key and is often displayed as an eight-character hexadecimal value.
-- **Key Fingerprint**: The Key Fingerprint is a longer and more unique identifier derived from the key material. It is often displayed as a 40-character hexadecimal value. Key fingerprints are commonly used to verify the integrity and authenticity of a public key.
-- **Key Algorithm**: The Key Algorithm represents the cryptographic algorithm used by the public key. OpenPGP supports various algorithms such as RSA, DSA, and ECC (Elliptic Curve Cryptography).
-- **Key Size**: The Key Size refers to the length or size of the cryptographic key in bits. It indicates the strength of the key and determines the level of security provided by the key.
-- **Key Creation Date**: The Key Creation Date indicates when the key was generated or created.
-- **Key Expiration Date**: OpenPGP Public Keys can have an expiration date set, after which they are considered invalid. The Key Expiration Date specifies when the key is no longer valid.
-- **User IDs**: Public keys can have one or more associated User IDs that identify the owner or entity associated with the key. User IDs typically include information such as the name, email address, and optional comments of the key owner.
+- **Key ID**: El ID de clave es un identificador corto derivado del material de la clave pública. Ayuda a identificar la clave y suele mostrarse como un valor hexadecimal de ocho caracteres.
+- **Key Fingerprint**: La huella de clave es un identificador más largo y único derivado del material de la clave. Suele mostrarse como un valor hexadecimal de 40 caracteres. Las huellas de clave se utilizan comúnmente para verificar la integridad y la autenticidad de una clave pública.
+- **Key Algorithm**: El algoritmo de clave representa el algoritmo criptográfico utilizado por la clave pública. OpenPGP admite varios algoritmos como RSA, DSA y ECC (criptografía de curva elíptica).
+- **Key Size**: El tamaño de clave se refiere a la longitud o tamaño de la clave criptográfica en bits. Indica la solidez de la clave y determina el nivel de seguridad que ofrece. 
+- **Key Creation Date**:La Fecha de Creación de la Clave indica cuándo se generó o creó la clave.
+- **Key Expiration Date**: Las Claves Públicas OpenPGP pueden tener una fecha de caducidad establecida, después de la cual se consideran inválidas. La Fecha de Caducidad de la Clave especifica cuándo la clave deja de ser válida.
+- **User IDs**: Las claves públicas pueden tener uno o más ID de Usuario asociados que identifican al propietario o la entidad asociada a la clave. Los ID de Usuario suelen incluir información como el nombre, la dirección de correo electrónico y comentarios opcionales del propietario de la clave.
 
 ### Humans TXT
 
-`humans.txt` is an initiative for knowing the people behind a site. It takes the form of a text file that contains information about the different people who have contributed to building the site. This file often (but not always) contains information related to career or job sites/paths.
+`humans.txt` es una iniciativa para conocer a las personas detrás de un sitio web. Se presenta como un archivo de texto que contiene información sobre las diferentes personas que han contribuido a la creación del sitio. Este archivo suele (aunque no siempre) contener información relacionada con sitios/rutas de trabajo o carreras profesionales.
 
-The following example was retrieved from Google 2020 May 05:
+El siguiente ejemplo se obtuvo de Google el 5 de mayo de 2020:
+
 
 ```bash
 $ wget --no-verbose  https://www.google.com/humans.txt && cat humans.txt
@@ -190,15 +193,15 @@ $ wget --no-verbose  https://www.google.com/humans.txt && cat humans.txt
 Google is built by a large team of engineers, designers, researchers, robots, and others in many different sites across the globe. It is updated continuously, and built with more tools and technologies than we can shake a stick at. If you'd like to help us out, see careers.google.com.
 ```
 
-### Other .well-known Information Sources
+### Otras fuentes de información .well-known
 
-There are other RFCs and internet drafts which suggest standardized uses of files within the `.well-known/` directory. Lists of these can be found [here](https://en.wikipedia.org/wiki/List_of_/.well-known/_services_offered_by_webservers) or [here](https://www.iana.org/assignments/well-known-uris/well-known-uris.xhtml).
+Existen otras RFC y borradores de internet que sugieren usos estandarizados de los archivos dentro del directorio `.well-known/`. Puede encontrar una lista de estas [aquí](https://en.wikipedia.org/wiki/List_of_/.well-known/_services_offered_by_webservers) or [here](https://www.iana.org/assignments/well-known-uris/well-known-uris.xhtml).
 
-It would be fairly simple for a tester to review the RFC/drafts and create a list to be supplied to a crawler or fuzzer, in order to verify the existence or content of such files.
+Sería bastante sencillo para un tester revisar el RFC/borradores y crear una lista para proporcionarla a un rastreador o fuzzer, con el fin de verificar la existencia o el contenido de dichos archivos.
 
-## Tools
+## Herramientas
 
-- Browser (View Source or Dev Tools functionality)
+- Navegador (Ver código fuente o funcionalidad de herramientas de desarrollo)
 - curl
 - wget
 - Burp Suite
