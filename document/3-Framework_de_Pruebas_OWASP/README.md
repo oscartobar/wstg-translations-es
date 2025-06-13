@@ -2,7 +2,7 @@
 
 3.1 [El marco de pruebas de seguridad web](0-El_framework_de_pruebas_de_seguridad_web.md)
 
-3.2 [Fase 1 antes del inicio del desarrollo](0-El_framework_de_pruebas_de_seguridad_web.md#phase-1-before-development-begins)
+3.2 [Fase 1 antes del inicio del desarrollo](0-El_framework_de_pruebas_de_seguridad_web.md#Fase_1_antes_del_inicio_del_Desarrollo)
 
 3.3 [Fase 2 durante la definición y el diseño](0-El_framework_de_pruebas_de_seguridad_web.md#phase-2-during-definition-and-design)
 
