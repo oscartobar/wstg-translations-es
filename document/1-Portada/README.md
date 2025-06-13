@@ -1,30 +1,30 @@
-# Frontispiece
+# Portada
 
-## Welcome
+## Bienvenidos
 
-> As we focus on incremental improvement, this release introduces numerous updates. We've standardized scenario formats to create a better reading experience, added objectives for each testing scenario, merged sections, and added new scenarios on some modern testing topics.
+> Dado que nos centramos en la mejora gradual, esta versión presenta numerosas actualizaciones. Hemos estandarizado los formatos de los escenarios para ofrecer una mejor experiencia de lectura, hemos añadido objetivos para cada escenario de prueba, hemos fusionado secciones y hemos añadido nuevos escenarios sobre algunos temas de pruebas modernas.
 >
 > — Rick Mitchell
 
-OWASP thanks the many authors, reviewers, and editors for their hard work in bringing this guide to where it is today. If you have any comments or suggestions on the Testing Guide, please feel free to open an Issue or submit a fix/contribution via Pull Request to our [GitHub repository](https://github.com/OWASP/wstg/).
+OWASP agradece a los numerosos autores, revisores y editores su arduo trabajo para que esta guía sea la versión actual. Si tiene algún comentario o sugerencia sobre la Guía de Pruebas, no dude en abrir una incidencia o enviar una corrección o contribución mediante una solicitud de incorporación de cambios a nuestro repositorio de GitHub (https://github.com/OWASP/wstg/).
 
-## Copyright and Licensee
+## Derechos de autor y licencia
 
 Copyright (c) 2025 The OWASP Foundation.
 
-This document is released under the [Creative Commons 4.0 License](https://creativecommons.org/licenses/by-sa/4.0/). Please read and understand the license and copyright conditions.
+Este documento se publica bajo la licencia Creative Commons 4.0 (https://creativecommons.org/licenses/by-sa/4.0/). Por favor, lea y comprenda las condiciones de la licencia y los derechos de autor.
 
-## Leaders
+## Líderes
 
 - Elie Saad
 - Rick Mitchell
 
-## Core Team
+## Equipo Central
 
 - Rejah Rehim
 - Victoria Drake
 
-## Authors
+## Autores
 
 - Aaron Williams
 - Alessia Michela Di Campi
@@ -49,14 +49,14 @@ This document is released under the [Creative Commons 4.0 License](https://creat
 - Tal Argoni
 - Victoria Drake
 
-## Graphic Designers
+## Diseñadores Gráficos
 
 - Hugo Costa
 - Jishnu Vijayan C K
 - Muhammed Anees
 - Ramzi Fazah
 
-## Reviewers or Editors
+## Revisores o Editores
 
 - Abhi M Balakrishnan
 - Asharaf Ali
@@ -80,23 +80,23 @@ This document is released under the [Creative Commons 4.0 License](https://creat
 - Tom Bowyer
 - Victoria Drake
 
-## Trademarks
+## Marcas comerciales
 
-- Java, Java Web Server, and JSP are registered trademarks of Sun Microsystems, Inc.
-- Merriam-Webster is a trademark of Merriam-Webster, Inc.
-- Microsoft is a registered trademark of Microsoft Corporation.
-- Octave is a service mark of Carnegie Mellon University.
-- Open Web Application Security Project and OWASP are registered trademarks of the OWASP Foundation, Inc.
-- VeriSign and Thawte are registered trademarks of VeriSign, Inc.
-- Visa is a registered trademark of VISA USA.
+- Java, Java Web Server y JSP son marcas registradas de Sun Microsystems, Inc.
+- Merriam-Webster es una marca registrada de Merriam-Webster, Inc.
+- Microsoft es una marca registrada de Microsoft Corporation.
+- Octave es una marca de servicio de la Universidad Carnegie Mellon.
+- Open Web Application Security Project y OWASP son marcas registradas de OWASP Foundation, Inc.
+- VeriSign y Thawte son marcas registradas de VeriSign, Inc.
+- Visa es una marca registrada de VISA USA.
 
-All other products and company names may be trademarks of their respective owners. Use of a term in this document should not be regarded as affecting the validity of any trademark or service mark.
+Todos los demás productos y nombres de empresas pueden ser marcas registradas de sus respectivos propietarios. El uso de un término en este documento no debe interpretarse como que afecta la validez de ninguna marca registrada o de servicio.
 
-## Contacting OWASP
+## Contacto con OWASP
 
-Contact details for the [OWASP Foundation](https://owasp.org/) are available [online](https://owasp.org/contact/). If you have a question concerning a particular project, we strongly recommend using the [Google Group](https://groups.google.com/a/owasp.org/forum/) for that project. Many questions can also be answered by searching the [OWASP](https://owasp.org/) site, so please check there first.
+Los datos de contacto de la [Fundación OWASP](https://owasp.org/) están disponibles [en línea](https://owasp.org/contact/). Si tiene alguna pregunta sobre un proyecto en particular, le recomendamos encarecidamente que utilice el [Grupo de Google](https://groups.google.com/a/owasp.org/forum/) correspondiente. Muchas preguntas también pueden resolverse consultando el sitio web de [OWASP](https://owasp.org/), así que consúltelo primero.
 
-### Follow Us
+### Síganos
 
 [![Follow OWASP on LinkedIn](images/follow_badge.png)](https://www.linkedin.com/company/owasp/)
 
