@@ -1,58 +1,58 @@
-# Foreword by Eoin Keary
+# Prólogo de Eoin Keary
 
-The problem of insecure software is perhaps the most important technical challenge of our time. The dramatic rise of web applications enabling business, social networking etc has only compounded the requirements to establish a robust approach to writing and securing our Internet, Web Applications and Data.
+El problema del software inseguro es quizás el desafío técnico más importante de nuestro tiempo. El drástico auge de las aplicaciones web que facilitan los negocios, las redes sociales, etc., no ha hecho más que agravar la necesidad de establecer un enfoque sólido para desarrollar y proteger internet, las aplicaciones web y los datos.
 
-At the Open Web Application Security Project® (OWASP®), we're trying to make the world a place where insecure software is the anomaly, not the norm. The OWASP Testing Guide has an important role to play in solving this serious issue. It is vitally important that our approach to testing software for security issues is based on the principles of engineering and science. We need a consistent, repeatable and defined approach to testing web applications. A world without some minimal standards in terms of engineering and technology is a world in chaos.
+En el Proyecto Abierto de Seguridad de Aplicaciones Web® (OWASP®), buscamos un mundo donde el software inseguro sea la anomalía, no la norma. La Guía de Pruebas de OWASP desempeña un papel fundamental en la solución de este grave problema. Es fundamental que nuestro enfoque para probar software en busca de problemas de seguridad se base en los principios de la ingeniería y la ciencia. Necesitamos un enfoque consistente, repetible y definido para probar aplicaciones web. Un mundo sin estándares mínimos en ingeniería y tecnología es un mundo sumido en el caos.
 
-It goes without saying that you can't build a secure application without performing security testing on it. Testing is part of a wider approach to build a secure system. Many software development organizations do not include security testing as part of their standard software development process. What is even worse is that many security vendors deliver testing with varying degrees of quality and rigor.
+Es evidente que no se puede crear una aplicación segura sin realizar pruebas de seguridad. Las pruebas forman parte de un enfoque más amplio para construir un sistema seguro. Muchas organizaciones de desarrollo de software no incluyen las pruebas de seguridad en su proceso estándar. Lo que es aún peor es que muchos proveedores de seguridad ofrecen pruebas con distintos grados de calidad y rigor.
 
-Security testing, by itself, isn't a particularly good stand alone measure of how secure an application is, because there are an infinite number of ways that an attacker might be able to make an application break, and it simply isn't possible to test them all. We can't hack ourselves secure as we only have a limited time to test and defend where an attacker does not have such constraints.
+Las pruebas de seguridad, por sí solas, no son una medida eficaz de la seguridad de una aplicación, ya que existen infinitas maneras en que un atacante podría dañarla, y simplemente no es posible probarlas todas. No podemos protegernos a nosotros mismos, ya que solo disponemos de un tiempo limitado para probar y defendernos donde un atacante no tenga tales restricciones.
 
-In conjunction with other OWASP projects such as the Code Review Guide, the Development Guide and tools such as [ZAP](https://www.zaproxy.org/), this is a great start towards building and maintaining secure applications. This Testing Guide will show you how to verify the security of your running application. I highly recommend using these guides as part of your application security initiatives.
+En conjunto con otros proyectos de OWASP, como la Guía de Revisión de Código, la Guía de Desarrollo y herramientas como [ZAP](https://www.zaproxy.org/), este es un excelente punto de partida para crear y mantener aplicaciones seguras. Esta Guía de Pruebas le mostrará cómo verificar la seguridad de su aplicación en ejecución. Recomiendo encarecidamente utilizar estas guías como parte de sus iniciativas de seguridad de aplicaciones.
 
-## Why OWASP?
+## ¿Por qué OWASP?
 
-Creating a guide like this is a huge undertaking, requiring the expertise of hundreds of people around the world. There are many different ways to test for security flaws and this guide captures the consensus of the leading experts on how to perform this testing quickly, accurately, and efficiently. OWASP gives like minded security folks the ability to work together and form a leading practice approach to a security problem.
+Crear una guía como esta es una tarea enorme que requiere la experiencia de cientos de personas en todo el mundo. Existen muchas maneras diferentes de detectar fallos de seguridad, y esta guía recoge el consenso de los principales expertos sobre cómo realizar estas pruebas de forma rápida, precisa y eficiente. OWASP ofrece a profesionales de seguridad con ideas afines la posibilidad de colaborar y desarrollar un enfoque práctico líder para cualquier problema de seguridad.
 
-The importance of having this guide available in a completely free and open way is important for the foundation's mission. It gives anyone the ability to understand the techniques used to test for common security issues. Security should not be a black art or closed secret that only a few can practice. It should be open to all and not exclusive to security practitioners but also QA, Developers and Technical Managers. The project to build this guide keeps this expertise in the hands of the people who need it - you, me and anyone that is involved in building software.
+La importancia de que esta guía esté disponible de forma completamente gratuita y abierta es crucial para la misión de la fundación. Permite a cualquier persona comprender las técnicas utilizadas para detectar problemas de seguridad comunes. La seguridad no debe ser un arte oscuro ni un secreto a voces que solo unos pocos puedan practicar. Debe estar abierta a todos y no ser exclusiva de los profesionales de la seguridad, sino también de los responsables de control de calidad, desarrolladores y técnicos. El proyecto de creación de esta guía mantiene esta experiencia en manos de quienes la necesitan: usted, yo y cualquier persona involucrada en el desarrollo de software.
 
-This guide must make its way into the hands of developers and software testers. There are not nearly enough application security experts in the world to make any significant dent in the overall problem. The initial responsibility for application security must fall on the shoulders of the developers because they write the code. It shouldn't be a surprise that developers aren't producing secure code if they're not testing for it or consider the types of bugs which introduce vulnerability.
+Esta guía debe llegar a los desarrolladores y testers de software. No hay suficientes expertos en seguridad de aplicaciones en el mundo para lograr una reducción significativa del problema general. La responsabilidad inicial de la seguridad de las aplicaciones debe recaer en los desarrolladores, ya que son ellos quienes escriben el código. No debería sorprender que los desarrolladores no produzcan código seguro si no lo prueban ni consideran los tipos de errores que introducen vulnerabilidades.
 
-Keeping this information up to date is a critical aspect of this guide project. By adopting the wiki approach, the OWASP community can evolve and expand the information in this guide to keep pace with the fast moving application security threat landscape.
+Mantener esta información actualizada es un aspecto fundamental de este proyecto de guía. Al adoptar el enfoque wiki, la comunidad de OWASP puede evolucionar y ampliar la información de esta guía para mantenerse al día con el cambiante panorama de amenazas a la seguridad de las aplicaciones.
 
-This Guide is a great testament to the passion and energy our members and project volunteers have for this subject. It shall certainly help to change the world a line of code at a time.
+Esta guía es un gran testimonio de la pasión y la energía que nuestros miembros y voluntarios del proyecto tienen por este tema. Sin duda, ayudará a cambiar el mundo, línea por línea.
 
-## Tailoring and Prioritizing
+## Adaptación y Priorización
 
-You should adopt this guide in your organization. You may need to tailor the information to match your organization's technologies, processes, and organizational structure.
+Debería adoptar esta guía en su organización. Es posible que necesite adaptar la información para que se ajuste a las tecnologías, los procesos y la estructura organizativa de su organización.
 
-In general there are several different roles within organizations that may use this guide:
+En general, existen varios roles dentro de las organizaciones que pueden usar esta guía:
 
-- Developers should use this guide to ensure that they are producing secure code. These tests should be a part of normal code and unit testing procedures.
-- Software testers and QA should use this guide to expand the set of test cases they apply to applications. Catching these vulnerabilities early saves considerable time and effort later.
-- Security specialists should use this guide in combination with other techniques as one way to verify that no security holes have been missed in an application.
-- Project Managers should consider the reason this guide exists and that security issues are manifested via bugs in code and design.
+- Los desarrolladores deben usar esta guía para asegurarse de que están produciendo código seguro. Estas pruebas deben formar parte de los procedimientos normales de código y pruebas unitarias.
+- Los testers de software y el equipo de control de calidad deben usar esta guía para ampliar el conjunto de casos de prueba que aplican a las aplicaciones. Detectar estas vulnerabilidades a tiempo ahorra tiempo y esfuerzo considerables posteriormente.
+- Los especialistas en seguridad deben usar esta guía en combinación con otras técnicas para verificar que no se hayan pasado por alto vulnerabilidades de seguridad en una aplicación.
+- Los gerentes de proyecto deben considerar la razón de ser de esta guía y que los problemas de seguridad se manifiestan a través de errores en el código y el diseño.
 
-The most important thing to remember when performing security testing is to continuously re-prioritize. There are infinite ways that an application could fail, and organizations always have limited testing time and resources. Be sure time and resources are spent wisely. Try to focus on the security holes that are a real risk to your business. Try to contextualize risk in terms of the application and its use cases.
+Lo más importante que debe recordar al realizar pruebas de seguridad es repriorizar continuamente. Hay infinitas maneras en que una aplicación puede fallar, y las organizaciones siempre tienen tiempo y recursos limitados para las pruebas. Asegúrese de invertir el tiempo y los recursos de forma inteligente. Céntrese en las vulnerabilidades de seguridad que representan un riesgo real para su negocio. Intente contextualizar el riesgo en función de la aplicación y sus casos de uso.
 
-This guide is best viewed as a set of techniques that you can use to find different types of security holes. But not all the techniques are equally important. Try to avoid using the guide as a checklist, new vulnerabilities are always manifesting and no guide can be an exhaustive list of "things to test for", but rather a great place to start.
+Esta guía se considera mejor como un conjunto de técnicas que puede utilizar para detectar diferentes tipos de vulnerabilidades de seguridad. Sin embargo, no todas las técnicas son igualmente importantes. Evite usar la guía como una lista de verificación, ya que siempre aparecen nuevas vulnerabilidades y ninguna guía puede ser una lista exhaustiva de "cosas que probar", sino un buen punto de partida.
 
-## The Role of Automated Tools
+## El rol de las herramientas automatizadas
 
-There are a number of companies selling automated security analysis and testing tools. Remember the limitations of these tools so that you can use them for what they're good at. As Michael Howard put it at the 2006 OWASP AppSec Conference in Seattle, "Tools do not make software secure! They help scale the process and help enforce policy."
+Existen varias empresas que venden herramientas automatizadas de análisis y pruebas de seguridad. Recuerde las limitaciones de estas herramientas para que pueda utilizarlas para lo que son eficaces. Como dijo Michael Howard en la Conferencia OWASP AppSec de 2006 en Seattle: "¡Las herramientas no hacen que el software sea seguro! Ayudan a escalar el proceso y a aplicar las políticas".
 
-Most importantly, these tools are generic - meaning that they are not designed for your custom code, but for applications in general. That means that while they can find some generic problems, they do not have enough knowledge of your application to allow them to detect most flaws. In my experience, the most serious security issues are the ones that are not generic, but deeply intertwined in your business logic and custom application design.
+Y lo más importante, estas herramientas son genéricas, lo que significa que no están diseñadas para su código personalizado, sino para aplicaciones en general. Esto significa que, si bien pueden detectar algunos problemas genéricos, no tienen el conocimiento suficiente de su aplicación para detectar la mayoría de las fallas. En mi experiencia, los problemas de seguridad más graves son aquellos que no son genéricos, sino que están profundamente arraigados en la lógica de negocio y el diseño personalizado de su aplicación.
 
-These tools can also be very useful, since they do find lots of potential issues. While running the tools doesn't take much time, each one of the potential problems takes time to investigate and verify. If the goal is to find and eliminate the most serious flaws as quickly as possible, consider whether your time is best spent with automated tools or with the techniques described in this guide. Still, these tools are certainly part of a well-balanced application security program. Used wisely, they can support your overall processes to produce more secure code.
+Estas herramientas también pueden ser muy útiles, ya que detectan numerosos problemas potenciales. Si bien ejecutarlas no requiere mucho tiempo, cada uno de los problemas potenciales requiere tiempo para investigar y verificar. Si el objetivo es encontrar y eliminar las fallas más graves lo antes posible, considere si es mejor invertir su tiempo en herramientas automatizadas o en las técnicas descritas en esta guía. Aun así, estas herramientas forman parte de un programa de seguridad de aplicaciones bien equilibrado. Si se utilizan correctamente, pueden respaldar sus procesos generales para producir código más seguro.
 
-## Call to Action
+## Llamada a la acción
 
-If you're building, designing or testing software, I strongly encourage you to get familiar with the security testing guidance in this document. It is a great road map for testing the most common issues that applications are facing today, but it is not exhaustive. If you find errors, please add a note to the discussion page or make the change yourself. You'll be helping thousands of others who use this guide.
+Si está desarrollando, diseñando o probando software, le recomiendo encarecidamente que se familiarice con la guía de pruebas de seguridad de este documento. Es una excelente guía para probar los problemas más comunes que enfrentan las aplicaciones hoy en día, pero no es exhaustiva. Si encuentra algún error, por favor, añada una nota a la página de discusión o modifique el contenido usted mismo. Estará ayudando a miles de personas que usan esta guía.
 
-Please consider [joining us](https://owasp.org/membership/) as an individual or corporate member so that we can continue to produce materials like this testing guide and all the other great projects at OWASP.
+Considere unirse a nosotros (https://owasp.org/membership/) como miembro individual o corporativo para que podamos seguir produciendo materiales como esta guía de pruebas y todos los demás proyectos importantes de OWASP.
 
-Thank you to all the past and future contributors to this guide, your work will help to make applications worldwide more secure.
+Gracias a todos los colaboradores pasados ​​y futuros de esta guía; su trabajo contribuirá a que las aplicaciones en todo el mundo sean más seguras.
 
---Eoin Keary, OWASP Board Member, April 19, 2013
+--Eoin Keary, Miembro de la Junta Directiva de OWASP, 19 de abril de 2013
 
-Open Web Application Security Project and OWASP are registered trademarks of the OWASP Foundation, Inc.
+Open Web Application Security Project y OWASP son marcas registradas de OWASP Foundation, Inc.
