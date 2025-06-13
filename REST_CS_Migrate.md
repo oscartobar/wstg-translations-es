@@ -1,68 +1,73 @@
-# REST Assessment Cheat Sheet
+# Hoja de referencia para la evaluación REST
 
-## About RESTful Web Services
+## Acerca de los servicios web RESTful
 
-Web Services are an implementation of web technology used for machine to machine communication. As such they are used for Inter application communication, Web 2.0 and Mashups and by desktop and mobile applications to call a server.
+Los servicios web son una implementación de la tecnología web utilizada para la comunicación máquina a máquina. Por lo tanto, se utilizan para la comunicación entre aplicaciones, Web 2.0 y mashups, y para que las aplicaciones de escritorio y móviles llamen a un servidor.
 
-RESTful web services (often called simply REST) are a light weight variant of Web Services based on the RESTful design pattern. In practice RESTful web services utilizes HTTP requests that are similar to regular HTTP calls in contrast with other Web Services technologies such as SOAP which utilizes a complex protocol.
+Los servicios web RESTful (a menudo llamados simplemente REST) ​​son una variante ligera de los servicios web basada en el patrón de diseño RESTful. En la práctica, los servicios web RESTful utilizan solicitudes HTTP similares a las llamadas HTTP normales, a diferencia de otras tecnologías de servicios web como SOAP, que utiliza un protocolo complejo.
 
-## Key relevant properties of RESTful web services
+## Propiedades clave relevantes de los servicios web RESTful
 
-- Use of HTTP methods (`GET`, `POST`, `PUT` and `DELETE`) as the primary verb for the requested operation.
-- Non-standard parameters specifications:
-    - As part of the URL.
-    - In headers.
-- Structured parameters and responses using JSON or XML in a parameter values, request body or response body. Those are required to communicate machine useful information.
-- Custom authentication and session management, often utilizing custom security tokens: this is needed as machine to machine communication does not allow for login sequences.
-- Lack of formal documentation. A [proposed standard for describing RESTful web services called WADL](https://www.w3.org/Submission/wadl/) was submitted by Sun Microsystems but was never officially adapted.
+- Uso de métodos HTTP (`GET`, `POST`, `PUT` y `DELETE`) como verbo principal para la operación solicitada.
+- Especificaciones de parámetros no estándar:
+- Como parte de la URL.
+- En los encabezados.
+- Parámetros y respuestas estructurados mediante JSON o XML en los valores de los parámetros, el cuerpo de la solicitud o el cuerpo de la respuesta. Estos son necesarios para comunicar información útil a la máquina.
+- Autenticación personalizada y gestión de sesiones, a menudo utilizando tokens de seguridad personalizados: esto es necesario, ya que la comunicación máquina a máquina no permite secuencias de inicio de sesión.
+- Falta de documentación formal. Sun Microsystems presentó una propuesta de estándar para describir servicios web RESTful llamada WADL (https://www.w3.org/Submission/wadl/), pero nunca se adaptó oficialmente.
 
-## The challenge of security testing RESTful web services
+## El desafío de las pruebas de seguridad de servicios web RESTful
 
-- Inspecting the application does not reveal the attack surface, I.e. the URLs and parameter structure used by the RESTful web service. The reasons are:
-    - No application utilizes all the available functions and parameters exposed by the service
-    - Those used are often activated dynamically by client-side code and not as links in pages.
-    - The client application is often not a web application and does not allow inspection of the activating link or even relevant code.
-- The parameters are none standard making it hard to determine what is just part of the URL or a constant header and what is a parameter worth [fuzzing](https://owasp.org/www-community/Fuzzing).
-- As a machine interface the number of parameters used can be very large, for example a JSON structure may include dozens of parameters. [fuzzing](https://owasp.org/www-community/Fuzzing) each one significantly lengthen the time required for testing.
-- Custom authentication mechanisms require reverse engineering and make popular tools not useful as they cannot track a login session.
+- Inspeccionar la aplicación no revela la superficie de ataque, es decir, las URL y la estructura de parámetros que utiliza el servicio web RESTful. Las razones son:
+- Ninguna aplicación utiliza todas las funciones y parámetros disponibles expuestos por el servicio.
+- Los utilizados suelen activarse dinámicamente mediante el código del lado del cliente y no como enlaces en las páginas.
+- La aplicación cliente a menudo no es una aplicación web y no permite la inspección del enlace de activación ni del código relevante. Los parámetros no son estándar, lo que dificulta determinar qué es solo una parte de la URL o un encabezado constante y qué parámetro merece ser sometido a fuzzing (https://owasp.org/www-community/Fuzzing).
 
-## How to pentest a RESTful web service
+Al ser una interfaz de máquina, la cantidad de parámetros utilizados puede ser muy grande; por ejemplo, una estructura JSON puede incluir docenas de parámetros. Cada uno de ellos alarga significativamente el tiempo de prueba.
 
-Determine the attack surface through documentation - RESTful pen testing might be better off if some level of white box testing is allowed and you can get information about the service.
+Los mecanismos de autenticación personalizados requieren ingeniería inversa y hacen que las herramientas populares sean ineficaces, ya que no pueden rastrear una sesión de inicio de sesión.
 
-This information will ensure fuller coverage of the attack surface. Such information to look for:
+## Cómo realizar pruebas de penetración en un servicio web RESTful
 
-- Formal service description - While for other types of web services such as SOAP a formal description, usually in WSDL is often available, this is seldom the case for REST. That said, either WSDL 2.0 or WADL can describe REST and are sometimes used.
-- A developer guide for using the service may be less detailed but will commonly be found, and might even be considered *black box*.
-- Application source or configuration - in many frameworks, including dotNet ,the REST service definition might be easily obtained from configuration files rather than from code.
+Determinar la superficie de ataque mediante documentación: Las pruebas de penetración RESTful pueden ser más eficaces si se permite cierto nivel de pruebas de caja blanca y se puede obtener información sobre el servicio.
 
-Collect full requests using a [proxy](https://www.zaproxy.org/) - while always an important pen testing step, this is more important for REST based applications as the application UI may not give clues on the actual attack surface.
+Esta información garantizará una cobertura más completa de la superficie de ataque. Información a buscar:
 
-Note that the proxy must be able to collect full requests and not just URLs as REST services utilize more than just GET parameters.
+- Descripción formal del servicio: Si bien para otros tipos de servicios web como SOAP suele estar disponible una descripción formal, generalmente en WSDL, esto rara vez ocurre con REST. Dicho esto, tanto WSDL 2.0 como WADL pueden describir REST y se utilizan a veces.
 
-Analyze collected requests to determine the attack surface:
+- Una guía para desarrolladores sobre el uso del servicio puede ser menos detallada, pero es común encontrarla, e incluso podría considerarse una "caja negra".
 
-- Look for non-standard parameters:
-    - Look for abnormal HTTP headers - those would many times be header based parameters.
-    - Determine if a URL segment has a repeating pattern across URLs. Such patterns can include a date, a number or an ID like string and indicate that the URL segment is a URL embedded parameter.
-        - For example: `https://server/srv/2013-10-21/use.php`
-    - Look for structured parameter values - those may be JSON, XML or a non-standard structure.
-    - If the last element of a URL does not have an extension, it may be a parameter. This is especially true if the application technology normally uses extensions or if a previous segment does have an extension.
-        - For example: `https://server/svc/Grid.asmx/GetRelatedListItems`
-    - Look for highly varying URL segments - a single URL segment that has many values may be parameter and not a physical directory.
-        - For example if the URL `https://server/src/XXXX/page` repeats with hundreds of value for `XXXX`, chances `XXXX` is a parameter.
+- Código fuente o configuración de la aplicación: en muchos frameworks, incluyendo .NET, la definición del servicio REST puede obtenerse fácilmente de los archivos de configuración en lugar del código.
 
-Verify non-standard parameters: in some cases (but not all), setting the value of a URL segment suspected of being a parameter to a value expected to be invalid can help determine if it is a path elements of a parameter. If a path element, the web server will return a *404* message, while for an invalid value to a parameter the answer would be an application level message as the value is legal at the web server level.
+Recopilar solicitudes completas mediante un [proxy](https://www.zaproxy.org/). Si bien es un paso importante en las pruebas de penetración, es aún más importante para las aplicaciones basadas en REST, ya que la interfaz de usuario de la aplicación podría no ofrecer pistas sobre la superficie de ataque real.
 
-Analyzing collected requests to optimize [fuzzing](https://owasp.org/www-community/Fuzzing) - after identifying potential parameters to fuzz, analyze the collected values for each to determine:
+Tenga en cuenta que el proxy debe ser capaz de recopilar solicitudes completas, no solo URL, ya que los servicios REST utilizan más que solo parámetros GET.
 
-- Valid vs. invalid values, so that [fuzzing](https://owasp.org/www-community/Fuzzing) can focus on marginal invalid values.
-    - For example sending *0* for a value found to be always a positive integer.
-- Sequences allowing to fuzz beyond the range presumably allocated to the current user.
+Analice las solicitudes recopiladas para determinar la superficie de ataque:
 
-Lastly, when [fuzzing](https://owasp.org/www-community/Fuzzing), don't forget to emulate the authentication mechanism used.
+- Busque parámetros no estándar:
+- Busque encabezados HTTP anormales; estos suelen ser parámetros basados ​​en encabezados.
+- Determine si un segmento de URL presenta un patrón repetitivo en las URL. Estos patrones pueden incluir una fecha, un número o una cadena similar a un ID, lo que indica que el segmento de URL es un parámetro incrustado en la URL.
+- Por ejemplo: `https://server/srv/2013-10-21/use.php`
+- Busque valores de parámetros estructurados; estos pueden ser JSON, XML o una estructura no estándar. Si el último elemento de una URL no tiene extensión, podría ser un parámetro. Esto es especialmente cierto si la tecnología de la aplicación suele usar extensiones o si un segmento anterior sí la tiene.
 
-## Related Resources
+Por ejemplo: `https://server/svc/Grid.asmx/GetRelatedListItems`
 
-- [REST Security Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/REST_Security_Cheat_Sheet.html) - the other side of this cheat sheet
-- [RESTful services, web security blind spot](https://www.youtube.com/watch?v=pWq4qGLAZHI) - avideo presentation elaborating on most of the topics on this cheat sheet.
+Buscar segmentos de URL con gran variabilidad: un único segmento de URL con muchos valores puede ser un parámetro y no un directorio físico.
+
+Por ejemplo, si la URL `https://server/src/XXXX/page` se repite con cientos de valores para `XXXX`, es probable que `XXXX` sea un parámetro.
+
+Verificar parámetros no estándar: en algunos casos (pero no en todos), establecer el valor de un segmento de URL sospechoso de ser un parámetro con un valor que se espera que no sea válido puede ayudar a determinar si se trata de un elemento de ruta de un parámetro. Si se trata de un elemento de ruta, el servidor web devolverá un mensaje *404*, mientras que si se trata de un valor no válido para un parámetro, la respuesta sería un mensaje a nivel de aplicación, ya que el valor es válido a nivel de servidor web.
+
+Análisis de las solicitudes recopiladas para optimizar el fuzzing (https://owasp.org/www-community/Fuzzing): tras identificar los posibles parámetros para fuzzing, analice los valores recopilados de cada uno para determinar:
+
+- Valores válidos e inválidos, para que el fuzzing (https://owasp.org/www-community/Fuzzing) pueda centrarse en los valores inválidos marginales.
+- Por ejemplo, enviar *0* para un valor que siempre es un entero positivo.
+- Secuencias que permiten fuzzing más allá del rango presumiblemente asignado al usuario actual.
+
+Por último, al fuzzing (https://owasp.org/www-community/Fuzzing), no olvide emular el mecanismo de autenticación utilizado.
+
+Recursos relacionados
+
+- [Hoja de trucos de seguridad REST](https://cheatsheetseries.owasp.org/cheatsheets/REST_Security_Cheat_Sheet.html) - La otra cara de esta hoja de trucos
+- [Servicios RESTful, punto ciego de seguridad web](https://www.youtube.com/watch?v=pWq4qGLAZHI) - Una presentación en video que profundiza en la mayoría de los temas de esta hoja de trucos.
