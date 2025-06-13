@@ -1,4 +1,4 @@
-# Fingerprint Web Application
+# Huella de la Aplicación Web
 
 |ID          |
 |------------|

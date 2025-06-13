@@ -1,4 +1,4 @@
-# Map Application Architecture
+# Mapa de Arquitectura de la aplicación
 
 |ID          |
 |------------|

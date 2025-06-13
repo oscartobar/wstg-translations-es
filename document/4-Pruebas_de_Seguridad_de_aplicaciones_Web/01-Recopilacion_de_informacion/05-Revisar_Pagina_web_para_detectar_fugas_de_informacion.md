@@ -1,5 +1,4 @@
-# Review Web Page Content for Information Leakage
-
+# Revisar el contenido de la página web para detectar fugas de información
 |ID          |
 |------------|
 |WSTG-INFO-05|

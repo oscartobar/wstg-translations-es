@@ -1,4 +1,4 @@
-# Map Execution Paths Through Application
+# Mapear rutas de ejecución a través de la aplicación
 
 |ID          |
 |------------|

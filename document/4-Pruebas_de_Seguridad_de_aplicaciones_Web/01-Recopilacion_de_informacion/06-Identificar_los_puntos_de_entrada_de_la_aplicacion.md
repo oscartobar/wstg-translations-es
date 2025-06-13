@@ -1,4 +1,4 @@
-# Identify Application Entry Points
+# Identificar los puntos de entrada de la aplicación
 
 |ID          |
 |------------|
