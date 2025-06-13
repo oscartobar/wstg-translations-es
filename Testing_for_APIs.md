@@ -1,94 +1,91 @@
-# API Testing
+# Pruebas de API
 
-Web APIs have gained a lot of popularity as they allow third-party programs to interact with sites in a more efficient and easy way. In this guide, we will discuss some basic concepts about APIs and the way to test security for APIs.
+Las API web han ganado mucha popularidad, ya que permiten que programas de terceros interactúen con sitios web de forma más eficiente y sencilla. En esta guía, analizaremos algunos conceptos básicos sobre las API y cómo probar su seguridad.
 
-## Background Concepts
+## Conceptos básicos
 
-REST (Representational State Transfer) is an architecture that is implemented while developer design APIs.
-Web application APIs following the REST style are called REST API.
-REST APIs use URIs (Uniform Resource Identifiers) to access resources. The generic URI syntax as defined in [RFC3986](https://tools.ietf.org/html/rfc3986) as below:
+REST (Transferencia de Estado Representacional) es una arquitectura que se implementa mientras los desarrolladores diseñan las API.
+Las API de aplicaciones web que siguen el estilo REST se denominan API REST.
+Las API REST utilizan URI (Identificadores Uniformes de Recursos) para acceder a los recursos. La sintaxis genérica de URI, tal como se define en [RFC3986](https://tools.ietf.org/html/rfc3986), es la siguiente:
 
 > URI = scheme "://" authority "/" path [ "?" query ] [ "#" fragment ]
 
-We are interested in the path of URI as the relationship between user and resources.
-For example, `https://api.test.xyz/admin/testing/report`, this shows report of testing, there is relationship between user admin and their reports.
+Nos interesa la ruta del URI como la relación entre el usuario y los recursos. Por ejemplo, "https://api.test.xyz/admin/testing/report" muestra el informe de las pruebas y existe una relación entre el usuario administrador y sus informes.
 
-The path of any URI will define REST API resource model, resources are separated by a forward slash and based on Top-Down design.
-For example:
+La ruta de cualquier URI definirá el modelo de recursos de la API REST. Los recursos se separan por una barra diagonal y se basan en un diseño descendente.
+Por ejemplo:
 
-- `https://api.test.xyz/admin/testing/report`
-- `https://api.test.xyz/admin/testing/`
-- `https://api.test.xyz/admin/`
+- "https://api.test.xyz/admin/testing/report"
+- "https://api.test.xyz/admin/testing/"
+- "https://api.test.xyz/admin/"
 
-REST API requests follow the [HTTP Request Methods](https://tools.ietf.org/html/rfc7231#section-4) defined in [RFC7231](https://tools.ietf.org/html/rfc7231)
+Las solicitudes de la API REST siguen los [Métodos de Solicitud HTTP](https://tools.ietf.org/html/rfc7231#section-4) definidos en [RFC7231](https://tools.ietf.org/html/rfc7231)
 
-| Methods | Description                                   |
+| Métodos | Descripción |
 |---------|-----------------------------------------------|
-| GET     | Get the representation of resource’s state    |
-| POST    | Create a new resource                         |
-| PUT     | Update a resource                             |
-| DELETE  | Remove a resource                             |
-| HEAD    | Get metadata associated with resource’s state |
-| OPTIONS | List available methods                        |
+| GET | Obtener la representación del estado del recurso |
+| POST | Crear un nuevo recurso |
+| PUT | Actualizar un recurso |
+| DELETE | Eliminar un recurso |
+| HEAD | Obtener los metadatos asociados al estado del recurso |
+| OPTIONS | Listar los métodos disponibles |
 
-REST APIs use the response status code of HTTP response message to notify the client about their request’s result.
+Las API REST utilizan el código de estado de respuesta del mensaje HTTP para notificar al cliente el resultado de su solicitud.
 
-| Response Code | Response Message      | Description                                                                                            |
+| Código de respuesta | Mensaje de respuesta | Descripción |
 |---------------|-----------------------|--------------------------------------------------------------------------------------------------------|
-| 200           | OK                    | Success while processing client's request                                                              |
-| 201           | Created               | New resource created                                                                                   |
-| 301           | Moved Permanently     | Permanent redirection                                                                                  |
-| 304           | Not Modified          | Caching related response that returned when the client has the same copy of the resource as the server |
-| 307           | Temporary Redirect    | Temporary redirection of resource                                                                      |
-| 400           | Bad Request           | Malformed request by the client                                                                        |
-| 401           | Unauthorized          | Client is not allowed to make requests or access a particular resource                                 |
-| 402           | Forbidden             | Client is forbidden to access the resource                                                             |
-| 404           | Not Found             | Resource doesn't exist or incorrect based on the request                                               |
-| 405           | Method Not Allowed    | Invalid method or unknown method used                                                                  |
-| 500           | Internal Server Error | Server failed to process request due to an internal error                                              |
+| 200 | OK | Solicitud del cliente procesada correctamente |
+| 201 | Creado | Nuevo recurso creado |
+| 301 | Movido permanentemente | Redirección permanente |
+| 304 | Sin modificar | Respuesta relacionada con el almacenamiento en caché que se devuelve cuando el cliente tiene la misma copia del recurso que el servidor |
+| 307 | Redirección temporal | Redirección temporal del recurso |
+| 400 | Solicitud incorrecta | Solicitud mal formada del cliente |
+| 401 | No autorizado | El cliente no puede realizar solicitudes ni acceder a un recurso en particular |
+| 402 | Prohibido | El cliente no puede acceder al recurso |
+| 404 | No encontrado | El recurso no existe o es incorrecto según la solicitud |
+| 405 | Método no permitido | Método no válido o desconocido |
+| 500 | Error interno del servidor | El servidor no pudo procesar la solicitud debido a un error interno |
 
-HTTP headers are used in requests and responses.
-While making API requests, Content-Type header is used and is set to `application/json` because the message body contains JSON data format.
+Las cabeceras HTTP se utilizan en solicitudes y respuestas.
+Al realizar solicitudes a la API, se utiliza la cabecera Content-Type, establecida en `application/json`, ya que el cuerpo del mensaje contiene datos en formato JSON.
 
-Web authentication types are based on:
+Los tipos de autenticación web se basan en:
 
-- Bearer Tokens: Identified by the `Authorization: Bearer <token>` header. Once a user logs in, they are provided with a bearer token that is sent on every request in order to authenticate and authorize the user to access OAuth 2.0 protected resources.
-- HTTP Cookies: Identified by the `Cookie: <name>=<unique value>` header. On user login success, the server replies with a `Set-Cookie` header specifying its name and unique value. On every request, the browser automatically appends it to the requests going to that server, following [SOP](https://developer.mozilla.org/en-US/docs/Web/Security/Same-origin_policy).
-- Basic HTTP authentication: Identified by the `Authorization: Basic <base64 value>` header. Once a user is trying to login, the request is sent with the mentioned header containing the a base64 value, having its content as `username:password`. This is one of the weakest forms of authentication as it transmits the username and password on every request in an encoded manner, which can be easily retrieved.
+- Tokens de portador: Se identifican mediante la cabecera `Authorization: Bearer <token>`. Al iniciar sesión, el usuario recibe un token de portador que se envía en cada solicitud para autenticarse y autorizar el acceso a recursos protegidos por OAuth 2.0.
+- Cookies HTTP: Se identifican mediante la cabecera `Cookie: <name>=<unique value>`. Si el usuario inicia sesión correctamente, el servidor responde con la cabecera `Set-Cookie`, que especifica su nombre y valor único. En cada solicitud, el navegador la añade automáticamente a las solicitudes dirigidas a ese servidor, siguiendo [SOP](https://developer.mozilla.org/en-US/docs/Web/Security/Same-origin_policy).
+- Autenticación HTTP básica: Se identifica mediante el encabezado `Authorization: Basic <base64 value>`. Cuando un usuario intenta iniciar sesión, la solicitud se envía con el encabezado mencionado, que contiene un valor base64, cuyo contenido es `username:password`. Este es uno de los métodos de autenticación más débiles, ya que transmite el nombre de usuario y la contraseña en cada solicitud de forma cifrada, lo que facilita su recuperación.
 
-## How to Test
+## Cómo realizar pruebas
 
-### Generic Testing Method
+### Método de prueba genérico
 
-Step 1: List endpoint and make different request method: Login with user profile and use a spider tool to list the endpoints of this role.
-To examine the endpoints, you will need to make different request methods and observe how the API behaves.
+Paso 1: Listar los endpoints y crear un método de solicitud diferente: Inicie sesión con el perfil de usuario y utilice una herramienta de rastreo para listar los endpoints de este rol.
+Para examinar los endpoints, deberá crear diferentes métodos de solicitud y observar el comportamiento de la API.
 
-Step 2: Exploit bugs - As know how to list endpoints and examine endpoints with HTTP methods at step 1, we will find some way to exploit bug. Some testing strategies are below:
+Paso 2: Aprovechar errores: Como ya sabemos cómo listar y examinar endpoints con métodos HTTP en el paso 1, buscaremos maneras de aprovechar errores. A continuación, se presentan algunas estrategias de prueba:
 
-- IDOR testing
-- Privilege escalation
+- Pruebas IDOR
+- Escalada de privilegios
 
-### Specific Testing – (Token-Based) Authentication
+### Pruebas específicas: autenticación (basada en tokens)
 
-Token-based authentication is implemented by sending a signed token (verified by the server) with each HTTP request.
+La autenticación basada en tokens se implementa enviando un token firmado (verificado por el servidor) con cada solicitud HTTP.
 
-The most commonly used token format is the JSON Web Token (JWT), defined in [RFC7519](https://tools.ietf.org/html/rfc7519). The [Testing JSON Web Tokens](/document/4-Pruebas_de_Seguridad_de_aplicaciones_Web/06-Session_Management_Testing/10-Testing_JSON_Web_Tokens.md) guide contains further details on how to test JWTs.
+El formato de token más utilizado es el JSON Web Token (JWT), definido en [RFC7519](https://tools.ietf.org/html/rfc7519). La guía [Testing JSON Web Tokens](/document/4-Pruebas_de_Seguridad_de_aplicaciones_Web/06-Session_Management_Testing/10-Testing_JSON_Web_Tokens.md) contiene más detalles sobre cómo probar JWT.
 
-## Related Test Cases
+## Casos de prueba relacionados
 
 - [IDOR](https://github.com/OWASP/wstg/blob/master/document/4-Pruebas_de_Seguridad_de_aplicaciones_Web/05-Authorization_Testing/04-Testing_for_Insecure_Direct_Object_References.md)
-- [Privilege escalation](https://github.com/OWASP/wstg/blob/master/document/4-Pruebas_de_Seguridad_de_aplicaciones_Web/05-Authorization_Testing/03-Testing_for_Privilege_Escalation.md)
-- All [Session Management](https://github.com/OWASP/wstg/tree/master/document/4-Pruebas_de_Seguridad_de_aplicaciones_Web/06-Session_Management_Testing) test cases
-- [Testing JSON Web Tokens](/document/4-Pruebas_de_Seguridad_de_aplicaciones_Web/06-Session_Management_Testing/10-Testing_JSON_Web_Tokens.md)
+- [Escalada de privilegios](https://github.com/OWASP/wstg/blob/master/document/4-Pruebas_de_Seguridad_de_aplicaciones_Web/05-Authorization_Testing/03-Testing_for_Privilege_Escalation.md)
+- Todo [Sesión Casos de prueba de administración (https://github.com/OWASP/wstg/tree/master/document/4-Pruebas_de_Seguridad_de_aplicaciones_Web/06-Session_Management_Testing)
+- [Pruebas de tokens web JSON](/document/4-Pruebas_de_Seguridad_de_aplicaciones_Web/06-Session_Management_Testing/10-Testing_JSON_Web_Tokens.md)
 
-## Tools
+## Herramientas
 
 - ZAP
-- Burp suite
+- Conjunto de herramientas Burp
 
-## References
+## Referencias
 
-- [REST HTTP Methods](https://restfulapi.net/http-methods/)
-- [RFC3986 URI](https://tools.ietf.org/html/rfc3986)
-- [JWT](https://jwt.io/)
-- [Cracking JWT](https://www.sjoerdlangkemper.nl/2016/09/28/attacking-jwt-authentication/)
+- [Métodos HTTP REST](https://restfulapi.net/http-methods/)
+- [URI RFC3986](https://tools.i)
