@@ -87,5 +87,7 @@ El formato de token más utilizado es el JSON Web Token (JWT), definido en [RFC7
 
 ## Referencias
 
-- [Métodos HTTP REST](https://restfulapi.net/http-methods/)
-- [URI RFC3986](https://tools.i)
+- [REST HTTP Methods](https://restfulapi.net/http-methods/)
+- [RFC3986 URI](https://tools.ietf.org/html/rfc3986)
+- [JWT](https://jwt.io/)
+- [Cracking JWT](https://www.sjoerdlangkemper.nl/2016/09/28/attacking-jwt-authentication/)
